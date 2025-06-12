@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Recycle Login/Signup</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .background-image {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-size: cover;
+      background-position: center;
+      z-index: -1;
+    }
+
+    .fade-out {
+      animation: fadeOut 1.5s forwards;
+    }
+
+    @keyframes fadeOut {
+      from { opacity: 1; }
+      to { opacity: 0; transform: scale(1.05); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="container">
+    
+    <!-- Sign Up -->
+    <div class="form-container sign-up-container">
+      <form id="signup-form">
+        <h1>Create Account</h1>
+        <input type="text" id="signup-name" placeholder="Name" required />
+        <input type="email" id="signup-email" placeholder="Email (Gmail)" required />
+        <div class="password-container">
+          <input type="password" placeholder="Password" id="signup-password" required />
+          <span class="eye-icon" onclick="togglePassword('signup-password')">👁️</span>
+        </div>
+        <button type="button" onclick="handleSignUp()">Sign Up</button>
+
+        <div class="social-icons">
+          <span>or sign up with</span>
+          <div class="social-container">
+            <a href="#"><img src="Gambar/facebook.png" alt="Facebook" /></a>
+            <a href="#"><img src="Gambar/google.png" alt="Google" /></a>
+            <a href="#"><img src="Gambar/twitter.png" alt="Twitter" /></a>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- Sign In -->
+    <div class="form-container sign-in-container">
+      <form id="login-form" onsubmit="return validateLogin()">
+        <h1>Sign In</h1>
+        <input type="text" id="login-name" placeholder="Name" required />
+        <div class="password-container">
+          <input type="password" placeholder="Password" id="signin-password" required />
+          <span class="eye-icon" onclick="togglePassword('signin-password')">👁️</span>
+        </div>
+        
+        <div style="width: 100%; display: flex; align-items: center; margin-top: 10px; margin-bottom: 15px;">
+          <input type="checkbox" id="remember" style="margin-right: 8px; width: 16px; height: 16px;" />
+          <label for="remember" style="font-size: 14px; cursor: pointer;">Remember me</label>
+        </div>
+
+
+        <button type="submit">Login</button>
+        <p style="margin-top: 10px;">Don't have an account? <strong>Create my account</strong></p>
+
+        <div class="social-icons">
+          <span>or sign in with</span>
+          <div class="social-container">
+            <a href="#"><img src="Gambar/facebook.png" alt="Facebook" /></a>
+            <a href="#"><img src="Gambar/google.png" alt="Google" /></a>
+            <a href="#"><img src="Gambar/twitter.png" alt="Twitter" /></a>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- Geser Panel -->
+    <div class="overlay-container">
+      <div class="overlay">
+        <!-- Panel Kiri dengan Background eco1.png -->
+        <div class="overlay-panel overlay-left" style="background-image: url('evo1.jpg'); background-size: cover; background-position: center;">
+          <div class="overlay-text">
+            <h1>Welcome Back!</h1>
+            <p>To keep connected, please login</p>
+            <button class="ghost" id="signIn">Login</button>
+          </div>
+        </div>
+
+        <!-- Panel Kanan dengan Background eco2.png -->
+        <div class="overlay-panel overlay-right" style="background-image: url('evo2.jpg'); background-size: cover; background-position: center;">
+          <div class="overlay-text">
+            <h1>Hello, Friend!</h1>
+            <p>Enter your personal details to register</p>
+            <button class="ghost" id="signUp">Sign Up</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  <!-- Script -->
+  <script>
+    const signUpButton = document.getElementById('signUp');
+    const signInButton = document.getElementById('signIn');
+    const container = document.getElementById('container');
+
+    signUpButton.addEventListener('click', () => {
+      container.classList.add("right-panel-active");
+    });
+
+    signInButton.addEventListener('click', () => {
+      container.classList.remove("right-panel-active");
+    });
+
+    function togglePassword(id) {
+      const input = document.getElementById(id);
+      input.type = input.type === "password" ? "text" : "password";
+    }
+
+    function validateLogin() {
+      const name = document.getElementById('login-name').value.trim();
+      const pass = document.getElementById('signin-password').value.trim();
+
+      if (name === "" || pass === "") {
+        alert("Please fill in all fields.");
+        return false;
+      }
+
+      // ✅ Simpan nama ke localStorage
+      localStorage.setItem("username", name);
+
+      // ✅ Simpan ke remember kalau dicentang
+      if (document.getElementById('remember').checked) {
+        localStorage.setItem("rememberedName", name);
+      } else {
+        localStorage.removeItem("rememberedName");
+      }
+
+      // Animasi keluar lalu redirect
+      document.getElementById('login-form').classList.add('fade-out');
+
+      setTimeout(() => {
+        window.location.href = "homepage.html";
+      }, 1500);
+
+      return false;
+    }
+
+    function handleSignUp() {
+      const name = document.getElementById('signup-name').value.trim();
+      const email = document.getElementById('signup-email').value.trim();
+      const pass = document.getElementById('signup-password').value.trim();
+
+      if (name === "" || email === "" || pass === "") {
+        alert("Please complete all sign up fields.");
+        return;
+      }
+
+      // ✅ Simpan nama ke localStorage
+      localStorage.setItem("username", name);
+
+      alert("Account created successfully! Now log in.");
+
+      // Geser ke panel login
+      container.classList.remove("right-panel-active");
+    }
+
+    window.onload = () => {
+      const remembered = localStorage.getItem('rememberedName');
+      if (remembered) {
+        document.getElementById('login-name').value = remembered;
+        document.getElementById('remember').checked = true;
+      }
+    };
+  </script>
+
+</body>
+</html>
