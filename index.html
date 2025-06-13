@@ -125,30 +125,34 @@
     }
 
     function validateLogin() {
-      const name = document.getElementById('login-name').value.trim();
-      const pass = document.getElementById('signin-password').value.trim();
+      const email = document.getElementById('login-email').value.trim();
+      const password = document.getElementById('signin-password').value.trim();
 
-      if (name === "" || pass === "") {
+      if (email === "" || password === "") {
         alert("Please fill in all fields.");
         return false;
       }
 
-      // ✅ Simpan nama ke localStorage
-      localStorage.setItem("username", name);
-
-      // ✅ Simpan ke remember kalau dicentang
-      if (document.getElementById('remember').checked) {
-        localStorage.setItem("rememberedName", name);
-      } else {
-        localStorage.removeItem("rememberedName");
-      }
-
-      // Animasi keluar lalu redirect
-      document.getElementById('login-form').classList.add('fade-out');
-
-      setTimeout(() => {
-        window.location.href = "homepage.html";
-      }, 1500);
+      fetch("http://localhost:8080/api/v1/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ email, password })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          localStorage.setItem("username", email);
+          window.location.href = "homepage.html";
+        } else {
+          alert(data.message || "Login failed. Please check your credentials.");
+        }
+      })
+      .catch(error => {
+        console.error("Login error:", error);
+        alert("An error occurred during login.");
+      });
 
       return false;
     }
@@ -156,30 +160,37 @@
     function handleSignUp() {
       const name = document.getElementById('signup-name').value.trim();
       const email = document.getElementById('signup-email').value.trim();
-      const pass = document.getElementById('signup-password').value.trim();
+      const password = document.getElementById('signup-password').value.trim();
 
-      if (name === "" || email === "" || pass === "") {
-        alert("Please complete all sign up fields.");
+      if (name === "" || email === "" || password === "") {
+        alert("Please complete all sign-up fields.");
         return;
       }
 
-      // ✅ Simpan nama ke localStorage
-      localStorage.setItem("username", name);
-
-      alert("Account created successfully! Now log in.");
-
-      // Geser ke panel login
-      container.classList.remove("right-panel-active");
+      fetch("http://localhost:8080/api/v1/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ name, email, password })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          alert("Account created successfully! Now log in.");
+          container.classList.remove("right-panel-active");
+        } else {
+          alert(data.message || "Registration failed.");
+        }
+      })
+      .catch(error => {
+        console.error("Registration error:", error);
+        alert("An error occurred during registration.");
+      });
     }
-
-    window.onload = () => {
-      const remembered = localStorage.getItem('rememberedName');
-      if (remembered) {
-        document.getElementById('login-name').value = remembered;
-        document.getElementById('remember').checked = true;
-      }
-    };
   </script>
+  
+  <script type="module" src="api.js"></script>
 
 </body>
 </html>

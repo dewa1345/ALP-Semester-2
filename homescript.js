@@ -1,3 +1,4 @@
+// Carousel
 let slideIndex = 0;
 const slides = document.querySelector(".slides");
 const dots = document.querySelectorAll(".dot");
@@ -10,7 +11,7 @@ function showSlide(index) {
 }
 
 function autoSlide() {
-  slideIndex = (slideIndex + 1) % 3;
+  slideIndex = (slideIndex + 1) % dots.length;
   showSlide(slideIndex);
 }
 
@@ -20,14 +21,14 @@ dots.forEach((dot, index) => {
 
 setInterval(autoSlide, 5000);
 
-// Chat Elements
+// Chatbot Elements
 const openChatBtn = document.getElementById('openChat');
 const closeChatBtn = document.getElementById('closeChat');
 const chatPopup = document.getElementById('chatPopup');
 const chatMessages = document.getElementById('chatMessages');
 const chatForm = document.getElementById('chatForm');
 const chatInput = document.getElementById('chatInput');
-const username = document.getElementById('username')?.textContent || 'Pengguna';
+const username = localStorage.getItem('username') || 'Pengguna';
 
 let lastTopic = '';
 
@@ -84,7 +85,7 @@ function getBotReply(userMsg) {
   if (msg.includes('daur ulang') || msg.includes('recycle')) { lastTopic = ''; return 'Daur ulang adalah proses mengubah sampah menjadi barang baru yang berguna.'; }
   if (msg.includes('sampah')) { lastTopic = ''; return 'Sampah terbagi menjadi organik (mudah terurai) dan non organik (sulit terurai). Yuk pilah dari rumah, ' + username + '!'; }
 
-  return 'Maaf, saya belum mengerti maksudmu, ' + username + '. Coba gunakan kata seperti "botol", "plastik", atau "apa manfaatnya?".';
+  return 'Maaf, saya belum mengerti maksudmu, ' + username + '. Coba gunakan kata seperti "botol", "plastik", atau "apa manfaatnya?"';
 }
 
 chatForm.addEventListener('submit', (e) => {
@@ -110,17 +111,17 @@ chatForm.addEventListener('submit', (e) => {
   }, 700);
 });
 
-// Dot sync untuk animasi slide otomatis
+// Dot sync for slide animation
 let currentSlide = 0;
-const totalSlides = 6;
+const totalSlides = dots.length;
 
 setInterval(() => {
   dots[currentSlide].classList.remove('active');
   currentSlide = (currentSlide + 1) % totalSlides;
   dots[currentSlide].classList.add('active');
-}, 6667); // 40s / 6 gambar
+}, 6667);
 
-// Efek like
+// Like button effect
 document.querySelectorAll('.like-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     btn.classList.toggle('liked');
