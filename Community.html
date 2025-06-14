@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Recycle Communities Forum</title>
+    <title> EcoV</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         .bubble-chat {
@@ -84,7 +84,7 @@
 
         .modal-content {
             background-color: #f6fdf4;
-            margin: auto;
+            margin: 60px auto auto auto;
             padding: 24px 18px;
             border: 1.5px solid #b5d6a2;
             width: 95%;
@@ -106,25 +106,86 @@
             text-decoration: none;
             cursor: pointer;
         }
+
+        /* NAVBAR STYLES */
+        .navbar {
+            width: 100vw;
+            height: 60px;
+            background: #2e944b;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(46, 148, 75, 0.08);
+        }
+
+        .navbar button {
+            margin-left: 24px;
+            background: #fff;
+            color: #2e944b;
+            border: 2px solid #2e944b;
+            border-radius: 8px;
+            padding: 8px 22px 8px 14px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 2px 8px rgba(46, 148, 75, 0.07);
+            cursor: pointer;
+            transition: background 0.15s, color 0.15s;
+        }
+
+        .navbar span {
+            margin-right: 32px;
+            color: #fff;
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .navbar-blur {
+            background: rgba(34, 34, 34, 0.7) !important;
+            box-shadow: 0 2px 8px rgba(34, 34, 34, 0.15);
+            backdrop-filter: blur(2px);
+            transition: background 0.2s;
+        }
+
+        .navbar-transparent {
+            background: transparent !important;
+            box-shadow: none !important;
+            backdrop-filter: none !important;
+            transition: background 0.2s;
+        }
+
+        .navbar-behind-modal {
+            z-index: 1 !important;
+        }
+
+        /* Extra space for fixed navbar */
+        .navbar-spacer {
+            height: 70px;
+        }
     </style>
 </head>
 
 <body class="bg-green-50 min-h-screen text-gray-800">
+    <!-- NAVBAR ATAS -->
+    <nav class="navbar">
+        <button onclick="window.history.back()">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="22"
+                height="22">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+            BACK
+        </button>
+        <span>Community</span>
+    </nav>
+    <div class="navbar-spacer"></div>
     <div class="container mx-auto py-8 px-4">
-        <div class="flex items-center justify-between mb-6">
-            <div class="flex items-center gap-3 bg-white rounded-lg px-3 py-1">
-                <button onclick="window.history.back()"
-                    class="text-[#678E34] bg-white hover:bg-gray-100 px-3 py-1 rounded font-semibold flex items-center gap-1 border border-[#678E34]">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                        class="w-5 h-5">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                    </svg>
-                    Back
-                </button>
-                <img src="logo.png" alt="Logo" class="h-8 w-8 object-contain" />
-            </div>
-            <h1 class="text-3xl font-bold text-[#678E34]">Forum Komunitas Recycle</h1>
-        </div>
         <div class="flex flex-col lg:flex-row gap-8">
             <!-- Sidebar komunitas -->
             <aside class="lg:w-1/4 w-full">
@@ -223,7 +284,7 @@
                     <input type="text" name="nama" class="w-full border rounded px-3 py-2" required>
                 </div>
                 <div>
-                    <label class="block font-semibold mb-1">Alamat</label>
+                    <label class="block font-semibold mb-1">Lokasi</label>
                     <input type="text" name="alamat" class="w-full border rounded px-3 py-2" required>
                 </div>
                 <div>
@@ -581,12 +642,22 @@
             var modal = document.getElementById('createCommunityModal');
             modal.classList.remove('hidden');
             modal.classList.add('flex');
+            // Navbar tetap hijau, tapi berada di belakang modal
+            var navbar = document.querySelector('.navbar');
+            if (navbar) {
+                navbar.classList.add('navbar-behind-modal');
+            }
         }
 
         function closeCreateCommunityModal() {
             var modal = document.getElementById('createCommunityModal');
             modal.classList.remove('flex');
             modal.classList.add('hidden');
+            // Kembalikan z-index navbar
+            var navbar = document.querySelector('.navbar');
+            if (navbar) {
+                navbar.classList.remove('navbar-behind-modal');
+            }
         }
         // Handle form submit
         const createForm = document.getElementById('createCommunityForm');
@@ -645,6 +716,13 @@
             }
         };
     </script>
+
+    <!-- NAVBAR BAWAH (FOOTER) -->
+    <footer class="bg-green-100 py-4 fixed bottom-0 left-0 w-full shadow-md">
+        <div class="container mx-auto px-4 text-center text-sm text-gray-600">
+            &copy; 2025 Tim Creator 🌱. All rights reserved.
+        </div>
+    </footer>
 </body>
 
 </html>
