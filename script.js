@@ -9,13 +9,13 @@ document.getElementById('signIn').addEventListener('click', () => {
   document.getElementById('container').classList.remove("right-panel-active");
 });
 
-// Toggle Password Visibility
+// Toggle Password Visibility (optional usage)
 function togglePassword(id) {
   const input = document.getElementById(id);
   input.type = input.type === "password" ? "text" : "password";
 }
 
-// Background Slideshow
+// Background Slideshow (optional visual feature)
 const images = ["evo1.jpg", "evo2.jpg", "evo3.jpg", "evo4.jpg"];
 let leftIndex = 0;
 let rightIndex = 2;
@@ -43,8 +43,10 @@ function updateBackgrounds() {
 updateBackgrounds();
 setInterval(updateBackgrounds, 5000);
 
-// Login Logic
+// 🔐 LOGIN Logic
 document.getElementById("login-btn").addEventListener("click", function () {
+  console.log("Login button clicked");
+
   const email = document.getElementById("login-name").value.trim();
   const password = document.getElementById("login-password").value.trim();
 
@@ -55,11 +57,12 @@ document.getElementById("login-btn").addEventListener("click", function () {
 
   authLogin({ email, password })
     .then((data) => {
+      console.log("Login response:", data);
       if (data.success) {
         localStorage.setItem("token", data.token);
         localStorage.setItem("username", data.name);
         localStorage.setItem("email", data.email);
-        window.location.href = "profile.html";
+        window.location.href = "homepage.html"; // ✅ change to "homepage.html" if needed
       } else {
         alert("Login gagal: " + data.message);
       }
@@ -70,7 +73,7 @@ document.getElementById("login-btn").addEventListener("click", function () {
     });
 });
 
-// Register Logic
+// 📝 REGISTER Logic
 document.getElementById("register-btn").addEventListener("click", function () {
   const name = document.getElementById("register-name").value.trim();
   const email = document.getElementById("register-email").value.trim();
@@ -83,6 +86,7 @@ document.getElementById("register-btn").addEventListener("click", function () {
 
   authRegister({ name, email, password })
     .then((data) => {
+      console.log("Register response:", data);
       if (data.success) {
         alert("Registrasi berhasil! Silakan login.");
         document.getElementById('signIn').click();

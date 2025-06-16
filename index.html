@@ -57,7 +57,7 @@
     <div class="form-container sign-in-container">
       <form id="login-form" onsubmit="return validateLogin()">
         <h1>Sign In</h1>
-        <input type="text" id="login-name" placeholder="Name" required />
+        <input type="email" id="login-email" placeholder="Email" required />
         <div class="password-container">
           <input type="password" placeholder="Password" id="signin-password" required />
           <span class="eye-icon" onclick="togglePassword('signin-password')">👁️</span>
@@ -143,7 +143,12 @@
       .then(response => response.json())
       .then(data => {
         if (data.success) {
-          localStorage.setItem("username", email);
+          // ✅ Save token + name
+          localStorage.setItem("token", data.token);
+          localStorage.setItem("username", data.name); // This is the real name from DB
+          localStorage.setItem("email", data.email);
+
+          // ✅ Redirect
           window.location.href = "homepage.html";
         } else {
           alert(data.message || "Login failed. Please check your credentials.");
@@ -156,6 +161,7 @@
 
       return false;
     }
+
 
     function handleSignUp() {
       const name = document.getElementById('signup-name').value.trim();
