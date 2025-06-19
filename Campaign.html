@@ -702,25 +702,38 @@
 
         /* Footer Styles */
         .footer {
-            background-color: #2e944b;
-            color: white;
+            background-color: #defced;
+            color: #222;
             padding: 10px 0;
             text-align: center;
-            position: relative;
+            position: fixed;
+            left: 0;
             bottom: 0;
-            width: 100%;
-            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+            width: 100vw;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 0.95rem;
+            box-shadow: none;
+            z-index: 200;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .footer .container {
-            max-width: 1200px;
+            width: 100vw;
             margin: 0 auto;
-            padding: 0 15px;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .footer p {
             margin: 0;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
+            color: #222;
+            letter-spacing: 0.5px;
+            text-align: center;
         }
     </style>
 </head>
