@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,37 +12,70 @@
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
+
         body {
             background-color: #f5f5f5;
             color: #333;
             line-height: 1.6;
         }
-        
+
         /* Navbar Styles */
         .navbar {
-            background-color: #2e944b;
-            color: white;
-            padding: 15px 20px;
+            width: 100vw;
+            height: 60px;
+            background: #235c37;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        
-        .navbar-brand {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(46, 148, 75, 0.08);
         }
 
-.cartesian-text {
-    margin-left: auto; /* Ini akan mendorong teks ke kanan */
-    padding-left: 20px; /* Jarak dari elemen sebelah kiri */
-}
+        .navbar button {
+            margin-left: 24px;
+            background: #fff;
+            color: #2e944b;
+            border: 2px solid #2e944b;
+            border-radius: 8px;
+            padding: 8px 22px 8px 14px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 2px 8px rgba(46, 148, 75, 0.07);
+            cursor: pointer;
+            transition: background 0.15s, color 0.15s;
+        }
 
-        
+        .navbar button:hover {
+            background: #e6f4ec;
+            color: #176b34;
+        }
+
+        .navbar span {
+            margin-right: 32px;
+            color: #fff;
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .navbar-spacer {
+            height: 70px;
+        }
+
+        .cartesian-text {
+            margin-left: auto;
+            /* Ini akan mendorong teks ke kanan */
+            padding-left: 20px;
+            /* Jarak dari elemen sebelah kiri */
+        }
+
+
         .back-btn {
             color: white;
             text-decoration: none;
@@ -50,24 +84,24 @@
             align-items: center;
             gap: 5px;
         }
-        
+
         .back-btn:hover {
             text-decoration: underline;
         }
-        
+
         .navbar-actions {
             display: flex;
             align-items: center;
             gap: 15px;
         }
-        
+
         .participant-count {
-            background: rgba(255,255,255,0.2);
+            background: rgba(255, 255, 255, 0.2);
             padding: 5px 10px;
             border-radius: 20px;
             font-size: 0.9rem;
         }
-        
+
         .create-campaign-btn {
             background: white;
             color: #2e944b;
@@ -78,11 +112,11 @@
             cursor: pointer;
             transition: background 0.3s;
         }
-        
+
         .create-campaign-btn:hover {
             background: #f0f0f0;
         }
-        
+
         .container {
             display: flex;
             max-width: 1200px;
@@ -90,7 +124,7 @@
             gap: 20px;
             padding: 0 15px;
         }
-        
+
         /* Header Styles */
         .header {
             display: flex;
@@ -98,17 +132,17 @@
             align-items: center;
             margin-bottom: 20px;
         }
-        
+
         /* Main Content Styles */
         .main-content {
             flex: 2;
             background: white;
             border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             padding: 25px;
             position: relative;
         }
-        
+
         .community-header {
             display: flex;
             align-items: center;
@@ -116,7 +150,7 @@
             border-bottom: 1px solid #eee;
             padding-bottom: 15px;
         }
-        
+
         .community-logo {
             width: 80px;
             height: 80px;
@@ -125,16 +159,16 @@
             margin-right: 20px;
             border: 3px solid #2e944b;
         }
-        
+
         .community-info h1 {
             color: #2e944b;
             margin-bottom: 5px;
         }
-        
+
         .community-info p {
             color: #666;
         }
-        
+
         .section-title {
             color: #2e944b;
             margin: 20px 0 15px;
@@ -142,11 +176,11 @@
             border-bottom: 2px solid #e0f5e7;
             padding-bottom: 5px;
         }
-        
+
         .events-list {
             list-style-type: none;
         }
-        
+
         .events-list li {
             background: #f9f9f9;
             margin-bottom: 10px;
@@ -157,18 +191,18 @@
             position: relative;
             cursor: pointer;
         }
-        
+
         .events-list li:hover {
             transform: translateX(5px);
             background: #f0f7f1;
         }
-        
+
         .event-title {
             font-weight: 600;
             color: #2e944b;
             margin-bottom: 5px;
         }
-        
+
         .join-btn {
             position: absolute;
             right: 15px;
@@ -182,36 +216,36 @@
             cursor: pointer;
             transition: background 0.3s;
         }
-        
+
         .join-btn:hover {
             background: #247a3a;
         }
-        
+
         .joined-btn {
             background: #4CAF50;
         }
-        
+
         .members-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
             gap: 15px;
             margin-top: 15px;
         }
-        
+
         .member-card {
             text-align: center;
             background: white;
             padding: 10px;
             border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
             transition: transform 0.2s;
         }
-        
+
         .member-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
-        
+
         .member-avatar {
             width: 60px;
             height: 60px;
@@ -220,19 +254,19 @@
             margin-bottom: 8px;
             border: 2px solid #2e944b;
         }
-        
+
         .member-name {
             font-weight: 500;
             color: #333;
         }
-        
+
         /* Chat Section Styles */
         .chat-section {
             margin-top: 30px;
             border-top: 1px solid #eee;
             padding-top: 20px;
         }
-        
+
         .chat-container {
             border: 1px solid #ddd;
             border-radius: 8px;
@@ -242,7 +276,7 @@
             margin-bottom: 15px;
             background: #f9f9f9;
         }
-        
+
         .chat-message {
             margin-bottom: 15px;
             padding: 10px;
@@ -250,37 +284,37 @@
             max-width: 70%;
             word-wrap: break-word;
         }
-        
+
         .received {
             background: #e0f5e7;
             align-self: flex-start;
         }
-        
+
         .sent {
             background: #2e944b;
             color: white;
             margin-left: auto;
         }
-        
+
         .message-info {
             display: flex;
             justify-content: space-between;
             font-size: 0.8rem;
             margin-bottom: 5px;
         }
-        
+
         .chat-input {
             display: flex;
             gap: 10px;
         }
-        
+
         .chat-input input {
             flex: 1;
             padding: 10px;
             border: 1px solid #ddd;
             border-radius: 5px;
         }
-        
+
         .chat-input button {
             background: #2e944b;
             color: white;
@@ -289,7 +323,7 @@
             padding: 0 15px;
             cursor: pointer;
         }
-        
+
         /* Event Detail Modal */
         .event-detail-modal {
             display: none;
@@ -298,21 +332,21 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0, 0, 0, 0.5);
             z-index: 100;
             align-items: center;
             justify-content: center;
         }
-        
+
         .event-detail-content {
             background: white;
             border-radius: 10px;
             width: 90%;
             max-width: 600px;
             padding: 25px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
-        
+
         .event-detail-header {
             display: flex;
             justify-content: space-between;
@@ -321,12 +355,12 @@
             border-bottom: 1px solid #eee;
             padding-bottom: 15px;
         }
-        
+
         .event-detail-title {
             color: #2e944b;
             font-size: 1.5rem;
         }
-        
+
         .event-detail-close {
             background: none;
             border: none;
@@ -334,7 +368,7 @@
             cursor: pointer;
             color: #888;
         }
-        
+
         .event-detail-image {
             width: 100%;
             height: 200px;
@@ -342,29 +376,29 @@
             border-radius: 8px;
             margin-bottom: 15px;
         }
-        
+
         .event-detail-info {
             margin-bottom: 15px;
         }
-        
+
         .event-detail-label {
             font-weight: 600;
             color: #2e944b;
             display: inline-block;
             width: 120px;
         }
-        
+
         .event-detail-description {
             margin-top: 20px;
             line-height: 1.7;
         }
-        
+
         .event-participants {
             margin-top: 20px;
             font-weight: 600;
             color: #2e944b;
         }
-        
+
         /* Sidebar Styles */
         .sidebar {
             flex: 1;
@@ -372,31 +406,31 @@
             flex-direction: column;
             gap: 20px;
         }
-        
+
         .calendar-card {
             background: white;
             border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             padding: 20px;
         }
-        
+
         .calendar-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 15px;
         }
-        
+
         .calendar-title {
             color: #2e944b;
             font-size: 1.2rem;
         }
-        
+
         .calendar-nav {
             display: flex;
             gap: 10px;
         }
-        
+
         .calendar-nav button {
             background: #e0f5e7;
             border: none;
@@ -408,24 +442,24 @@
             align-items: center;
             justify-content: center;
         }
-        
+
         .calendar-nav button:hover {
             background: #c8e8d4;
         }
-        
+
         .calendar-month {
             font-weight: 600;
             text-align: center;
             margin-bottom: 10px;
             color: #333;
         }
-        
+
         .calendar-grid {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
             gap: 5px;
         }
-        
+
         .calendar-day-header {
             text-align: center;
             font-weight: 600;
@@ -433,7 +467,7 @@
             padding: 5px;
             font-size: 0.9rem;
         }
-        
+
         .calendar-day {
             text-align: center;
             padding: 8px;
@@ -441,21 +475,21 @@
             cursor: pointer;
             font-size: 0.9rem;
         }
-        
+
         .calendar-day:hover {
             background: #e0f5e7;
         }
-        
+
         .current-day {
             background: #2e944b;
             color: white;
             font-weight: bold;
         }
-        
+
         .event-day {
             position: relative;
         }
-        
+
         .event-day::after {
             content: '';
             position: absolute;
@@ -467,14 +501,14 @@
             background: #e53935;
             border-radius: 50%;
         }
-        
+
         .upcoming-events {
             background: white;
             border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             padding: 20px;
         }
-        
+
         .upcoming-event {
             display: flex;
             margin-bottom: 15px;
@@ -482,7 +516,7 @@
             border-bottom: 1px dashed #eee;
             cursor: pointer;
         }
-        
+
         .event-date {
             background: #2e944b;
             color: white;
@@ -496,64 +530,64 @@
             margin-right: 15px;
             flex-shrink: 0;
         }
-        
+
         .event-date .day {
             font-size: 1.2rem;
             font-weight: bold;
         }
-        
+
         .event-date .month {
             font-size: 0.7rem;
             text-transform: uppercase;
         }
-        
+
         .event-details {
             flex-grow: 1;
         }
-        
+
         .event-details h4 {
             color: #2e944b;
             margin-bottom: 5px;
         }
-        
+
         .event-details p {
             color: #666;
             font-size: 0.9rem;
         }
-        
+
         /* Campaign List in Sidebar */
         .campaign-list-sidebar {
             background: white;
             border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             padding: 20px;
         }
-        
+
         .campaign-item-sidebar {
             margin-bottom: 15px;
             padding-bottom: 15px;
             border-bottom: 1px dashed #eee;
         }
-        
+
         .campaign-item-sidebar:last-child {
             margin-bottom: 0;
             padding-bottom: 0;
             border-bottom: none;
         }
-        
+
         .campaign-title-sidebar {
             color: #2e944b;
             font-size: 1rem;
             margin-bottom: 5px;
         }
-        
+
         .campaign-meta-sidebar {
             display: flex;
             justify-content: space-between;
             color: #888;
             font-size: 0.8rem;
         }
-        
+
         /* Modal Styles */
         .modal {
             display: none;
@@ -562,21 +596,21 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0, 0, 0, 0.5);
             z-index: 100;
             align-items: center;
             justify-content: center;
         }
-        
+
         .modal-content {
             background: white;
             border-radius: 10px;
             width: 90%;
             max-width: 500px;
             padding: 20px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
-        
+
         .modal-header {
             display: flex;
             justify-content: space-between;
@@ -585,12 +619,12 @@
             border-bottom: 1px solid #eee;
             padding-bottom: 10px;
         }
-        
+
         .modal-title {
             color: #2e944b;
             font-size: 1.3rem;
         }
-        
+
         .close-btn {
             background: none;
             border: none;
@@ -598,19 +632,19 @@
             cursor: pointer;
             color: #888;
         }
-        
+
         .form-group {
             margin-bottom: 15px;
         }
-        
+
         .form-group label {
             display: block;
             margin-bottom: 5px;
             font-weight: 600;
             color: #555;
         }
-        
-        .form-group input, 
+
+        .form-group input,
         .form-group textarea,
         .form-group select {
             width: 100%;
@@ -618,16 +652,16 @@
             border: 1px solid #ddd;
             border-radius: 5px;
         }
-        
+
         .form-row {
             display: flex;
             gap: 15px;
         }
-        
+
         .form-row .form-group {
             flex: 1;
         }
-        
+
         .submit-btn {
             background: #2e944b;
             color: white;
@@ -639,42 +673,71 @@
             width: 100%;
             margin-top: 10px;
         }
-        
+
         .submit-btn:hover {
             background: #247a3a;
         }
-        
+
         .error-message {
             color: #e53935;
             font-size: 0.8rem;
             margin-top: 5px;
             display: none;
         }
-        
+
         /* Responsive */
         @media (max-width: 768px) {
             .container {
                 flex-direction: column;
             }
-            
+
             .members-grid {
                 grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
             }
-            
+
             .sidebar {
                 order: -1;
             }
         }
+
+        /* Footer Styles */
+        .footer {
+            background-color: #2e944b;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .footer .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .footer p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
     </style>
 </head>
+
 <body>
     <!-- Navbar -->
     <nav class="navbar">
-        <div class="navbar-brand">
-            <a href="homepage.html" class="back-btn">← Back</a>
-            <span class="cartesian-text">Campaign</span>
-        </div>
+        <button onclick="window.history.back()">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="22"
+                height="22">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+            BACK
+        </button>
+        <span>Campaign</span>
     </nav>
+    <div class="navbar-spacer"></div>
 
     <div class="container">
         <main class="main-content">
@@ -682,25 +745,26 @@
                 <h1 class="section-title" id="mainTitle">Campaign Peduli_Mks</h1>
                 <button class="create-campaign-btn" id="openCreateModal">+ Create Campaign</button>
             </div>
-            
+
             <div class="community-header" id="communityHeader">
                 <img src="logo.png" alt="Peduli_Mks Logo" class="community-logo">
                 <div class="community-info">
                     <h1 id="communityName">EcoV</h1>
-                    <p id="communityDesc">Campaign peduli lingkungan Makassar yang fokus pada edukasi dan aksi recycle di masyarakat.</p>
+                    <p id="communityDesc">Campaign peduli lingkungan Makassar yang fokus pada edukasi dan aksi recycle
+                        di masyarakat.</p>
                 </div>
             </div>
-            
+
             <h2 class="section-title" id="eventSectionTitle">Event</h2>
             <ul class="events-list" id="eventsList">
                 <!-- Events will be added dynamically -->
             </ul>
-            
+
             <h2 class="section-title" id="membersTitle">Anggota Campaign</h2>
             <div class="members-grid" id="membersGrid">
                 <!-- Members will be added dynamically -->
             </div>
-            
+
             <!-- New Chat Section -->
             <div class="chat-section">
                 <h2 class="section-title" id="chatTitle">Forum Diskusi</h2>
@@ -713,7 +777,7 @@
                 </div>
             </div>
         </main>
-        
+
         <aside class="sidebar">
             <div class="calendar-card">
                 <div class="calendar-header">
@@ -728,14 +792,14 @@
                     <!-- Calendar will be generated dynamically -->
                 </div>
             </div>
-            
+
             <div class="upcoming-events">
                 <h3 class="calendar-title">Event Mendatang</h3>
                 <div id="upcomingEvents">
                     <!-- Upcoming events will be added dynamically -->
                 </div>
             </div>
-            
+
             <div class="campaign-list-sidebar">
                 <h3 class="calendar-title">Campaign Terbaru</h3>
                 <div id="campaignsList">
@@ -994,8 +1058,8 @@
         // Calendar variables
         let currentMonth = new Date().getMonth();
         let currentYear = new Date().getFullYear();
-        const months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", 
-                       "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+        const months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni",
+            "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
 
         // Current selected event
         let currentEvent = null;
@@ -1025,7 +1089,7 @@
         const eventDetailTime = document.getElementById('eventDetailTime');
         const eventDetailDescription = document.getElementById('eventDetailDescription');
         const eventDetailParticipants = document.getElementById('eventDetailParticipants');
-        
+
         // New elements for dynamic content
         const mainTitle = document.getElementById('mainTitle');
         const communityHeader = document.getElementById('communityHeader');
@@ -1042,7 +1106,7 @@
             renderUpcomingEvents();
             renderCampaigns();
             generateCalendar(currentMonth, currentYear);
-            
+
             // Event listeners
             prevMonthBtn.addEventListener('click', () => {
                 currentMonth--;
@@ -1052,7 +1116,7 @@
                 }
                 generateCalendar(currentMonth, currentYear);
             });
-            
+
             nextMonthBtn.addEventListener('click', () => {
                 currentMonth++;
                 if (currentMonth > 11) {
@@ -1061,29 +1125,29 @@
                 }
                 generateCalendar(currentMonth, currentYear);
             });
-            
+
             openCreateModalBtn.addEventListener('click', () => {
                 createModal.style.display = 'flex';
             });
-            
+
             closeCreateModalBtn.addEventListener('click', () => {
                 createModal.style.display = 'none';
                 resetForm();
             });
-            
+
             closeEventDetailBtn.addEventListener('click', () => {
                 eventDetailModal.style.display = 'none';
             });
-            
+
             campaignForm.addEventListener('submit', handleFormSubmit);
-            
+
             sendMessageBtn.addEventListener('click', sendMessage);
             chatInput.addEventListener('keypress', (e) => {
                 if (e.key === 'Enter') {
                     sendMessage();
                 }
             });
-            
+
             // Close modals when clicking outside
             window.addEventListener('click', (e) => {
                 if (e.target === createModal) {
@@ -1094,7 +1158,7 @@
                     eventDetailModal.style.display = 'none';
                 }
             });
-            
+
             // Set default view to first event
             if (events.length > 0) {
                 selectEvent(events[0]);
@@ -1104,7 +1168,7 @@
         // Select an event to display its details
         function selectEvent(event) {
             currentEvent = event;
-            
+
             // Update main content
             mainTitle.textContent = event.title;
             communityName.textContent = event.community;
@@ -1112,10 +1176,10 @@
             eventSectionTitle.textContent = "Detail Event";
             membersTitle.textContent = "Peserta Event (" + event.members.length + ")";
             chatTitle.textContent = "Diskusi Event";
-            
+
             // Update members grid
             renderMembers(event.members);
-            
+
             // Update chat
             renderChatMessages(event.chats);
         }
@@ -1123,16 +1187,16 @@
         // Render members list
         function renderMembers(members) {
             membersGrid.innerHTML = '';
-            
+
             members.forEach(member => {
                 const memberCard = document.createElement('div');
                 memberCard.className = 'member-card';
-                
+
                 memberCard.innerHTML = `
                     <img src="${member.avatar}" alt="${member.name}" class="member-avatar">
                     <div class="member-name">${member.name}</div>
                 `;
-                
+
                 membersGrid.appendChild(memberCard);
             });
         }
@@ -1140,15 +1204,15 @@
         // Render events list
         function renderEvents() {
             eventsList.innerHTML = '';
-            
+
             events.forEach(event => {
                 const eventItem = document.createElement('li');
                 eventItem.dataset.id = event.id;
-                
+
                 const startDate = new Date(event.startDate);
                 const endDate = new Date(event.endDate);
                 const dateOptions = { day: 'numeric', month: 'long', year: 'numeric' };
-                
+
                 eventItem.innerHTML = `
                     <div class="event-title">${event.title} (${startDate.toLocaleDateString('id-ID', dateOptions)})</div>
                     <p>${event.description.substring(0, 100)}...</p>
@@ -1156,9 +1220,9 @@
                         ${event.joined ? 'Joined' : 'Join'}
                     </button>
                 `;
-                
+
                 eventsList.appendChild(eventItem);
-                
+
                 // Add click event to show details
                 eventItem.addEventListener('click', (e) => {
                     // Don't trigger if clicking on join button
@@ -1167,14 +1231,14 @@
                     }
                 });
             });
-            
+
             // Add event listeners to join buttons
             document.querySelectorAll('.join-btn').forEach(btn => {
-                btn.addEventListener('click', function(e) {
+                btn.addEventListener('click', function (e) {
                     e.stopPropagation(); // Prevent triggering the parent click event
                     const eventId = parseInt(this.parentElement.dataset.id);
                     const event = events.find(e => e.id === eventId);
-                    
+
                     if (event) {
                         event.joined = !event.joined;
                         if (event.joined) {
@@ -1182,7 +1246,7 @@
                             this.textContent = 'Joined';
                             this.classList.add('joined-btn');
                             alert(`Anda telah bergabung dengan "${event.title}"`);
-                            
+
                             // Add current user to members if not already there
                             const userAlreadyMember = event.members.some(m => m.name === "You");
                             if (!userAlreadyMember) {
@@ -1191,7 +1255,7 @@
                                     avatar: ""
                                 });
                             }
-                            
+
                             // Add a chat message about joining
                             const newChatMessage = {
                                 id: event.chats.length + 1,
@@ -1202,7 +1266,7 @@
                                 isCurrentUser: true
                             };
                             event.chats.push(newChatMessage);
-                            
+
                             // Update UI
                             if (currentEvent && currentEvent.id === event.id) {
                                 selectEvent(event);
@@ -1212,10 +1276,10 @@
                             event.participants--;
                             this.textContent = 'Join';
                             this.classList.remove('joined-btn');
-                            
+
                             // Remove current user from members
                             event.members = event.members.filter(m => m.name !== "You");
-                            
+
                             // Update UI
                             if (currentEvent && currentEvent.id === event.id) {
                                 selectEvent(event);
@@ -1230,11 +1294,11 @@
         function showEventDetails(eventId) {
             const event = events.find(e => e.id === eventId);
             if (!event) return;
-            
+
             const startDate = new Date(event.startDate);
             const endDate = new Date(event.endDate);
-            const dateOptions = { day: 'numeric', month: 'long', year: 'numeric' };
-            
+            const dateOptions = { day: 'numeric', month: 'short' };
+
             eventDetailTitle.textContent = event.title;
             eventDetailImage.src = event.image;
             eventDetailCommunity.textContent = event.community;
@@ -1243,20 +1307,20 @@
             eventDetailTime.textContent = `${event.startTime} - ${event.endTime}`;
             eventDetailDescription.textContent = event.description;
             eventDetailParticipants.textContent = `${event.participants} orang telah bergabung`;
-            
+
             eventDetailModal.style.display = 'flex';
         }
 
         // Render chat messages
         function renderChatMessages(messages) {
             chatContainer.innerHTML = '';
-            
+
             if (!messages) return;
-            
+
             messages.forEach(msg => {
                 const messageElement = document.createElement('div');
                 messageElement.className = `chat-message ${msg.isCurrentUser ? 'sent' : 'received'}`;
-                
+
                 if (!msg.isCurrentUser) {
                     messageElement.innerHTML = `
                         <div class="message-info">
@@ -1273,10 +1337,10 @@
                         <div>${msg.message}</div>
                     `;
                 }
-                
+
                 chatContainer.appendChild(messageElement);
             });
-            
+
             // Scroll to bottom
             chatContainer.scrollTop = chatContainer.scrollHeight;
         }
@@ -1285,7 +1349,7 @@
         function sendMessage() {
             const messageText = chatInput.value.trim();
             if (messageText === '' || !currentEvent) return;
-            
+
             const newMessage = {
                 id: currentEvent.chats.length + 1,
                 sender: "You",
@@ -1294,11 +1358,11 @@
                 time: new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }),
                 isCurrentUser: true
             };
-            
+
             currentEvent.chats.push(newMessage);
             renderChatMessages(currentEvent.chats);
             chatInput.value = '';
-            
+
             // Simulate a reply after 1-3 seconds
             setTimeout(() => {
                 const replies = [
@@ -1308,13 +1372,13 @@
                     "Ada yang bisa saya bantu?",
                     "Terima kasih atas informasinya!"
                 ];
-                
+
                 const randomReply = replies[Math.floor(Math.random() * replies.length)];
                 const randomMember = currentEvent.members[Math.floor(Math.random() * currentEvent.members.length)];
-                
+
                 // Don't reply as the current user
                 if (randomMember.name === "You") return;
-                
+
                 const replyMessage = {
                     id: currentEvent.chats.length + 1,
                     sender: randomMember.name,
@@ -1323,7 +1387,7 @@
                     time: new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }),
                     isCurrentUser: false
                 };
-                
+
                 currentEvent.chats.push(replyMessage);
                 renderChatMessages(currentEvent.chats);
             }, 1000 + Math.random() * 2000);
@@ -1332,21 +1396,21 @@
         // Render upcoming events
         function renderUpcomingEvents() {
             upcomingEvents.innerHTML = '';
-            
+
             // Sort events by date
-            const sortedEvents = [...events].sort((a, b) => 
+            const sortedEvents = [...events].sort((a, b) =>
                 new Date(a.startDate) - new Date(b.startDate));
-            
+
             sortedEvents.forEach(event => {
                 const startDate = new Date(event.startDate);
                 const endDate = new Date(event.endDate);
-                const monthNames = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", 
-                                  "Jul", "Agu", "Sep", "Okt", "Nov", "Des"];
-                
+                const monthNames = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun",
+                    "Jul", "Agu", "Sep", "Okt", "Nov", "Des"];
+
                 const eventElement = document.createElement('div');
                 eventElement.className = 'upcoming-event';
                 eventElement.dataset.id = event.id;
-                
+
                 eventElement.innerHTML = `
                     <div class="event-date">
                         <span class="day">${startDate.getDate()}</span>
@@ -1359,11 +1423,11 @@
                         <p>${event.joined ? '✔ Anda telah bergabung' : ''}</p>
                     </div>
                 `;
-                
+
                 eventElement.addEventListener('click', () => {
                     selectEvent(event);
                 });
-                
+
                 upcomingEvents.appendChild(eventElement);
             });
         }
@@ -1371,15 +1435,15 @@
         // Render campaigns
         function renderCampaigns() {
             campaignsList.innerHTML = '';
-            
+
             campaigns.forEach(campaign => {
                 const startDate = new Date(campaign.startDate);
                 const endDate = new Date(campaign.endDate);
                 const dateOptions = { day: 'numeric', month: 'short' };
-                
+
                 const campaignElement = document.createElement('div');
                 campaignElement.className = 'campaign-item-sidebar';
-                
+
                 campaignElement.innerHTML = `
                     <h4 class="campaign-title-sidebar">${campaign.title}</h4>
                     <p>${campaign.description}</p>
@@ -1388,7 +1452,7 @@
                         <span>${campaign.participants} peserta</span> <!-- Ini akan menampilkan jumlah peserta -->
                     </div>
                 `;
-                
+
                 campaignsList.appendChild(campaignElement);
             });
         }
@@ -1397,7 +1461,7 @@
         function generateCalendar(month, year) {
             monthYearDisplay.textContent = `${months[month]} ${year}`;
             calendarGrid.innerHTML = '';
-            
+
             // Create day headers
             const dayNames = ["M", "S", "S", "R", "K", "J", "S"];
             dayNames.forEach(day => {
@@ -1406,44 +1470,44 @@
                 dayElement.textContent = day;
                 calendarGrid.appendChild(dayElement);
             });
-            
+
             // Get first day of month and total days
             const firstDay = new Date(year, month, 1).getDay();
             const daysInMonth = new Date(year, month + 1, 0).getDate();
-            
+
             // Adjust for Monday as first day (0 -> Monday, 6 -> Sunday)
             const firstDayIndex = firstDay === 0 ? 6 : firstDay - 1;
-            
+
             // Add empty cells for days before first day
             for (let i = 0; i < firstDayIndex; i++) {
                 const emptyCell = document.createElement('div');
                 emptyCell.className = 'calendar-day empty';
                 calendarGrid.appendChild(emptyCell);
             }
-            
+
             // Add days of month
             const today = new Date();
             for (let day = 1; day <= daysInMonth; day++) {
                 const dayElement = document.createElement('div');
                 dayElement.className = 'calendar-day';
                 dayElement.textContent = day;
-                
+
                 // Highlight current day
                 if (day === today.getDate() && month === today.getMonth() && year === today.getFullYear()) {
                     dayElement.classList.add('current-day');
                 }
-                
+
                 // Mark days with events
                 const hasEvent = events.some(event => {
                     const eventDate = new Date(event.startDate);
-                    return eventDate.getDate() === day && 
-                           eventDate.getMonth() === month && 
-                           eventDate.getFullYear() === year;
+                    return eventDate.getDate() === day &&
+                        eventDate.getMonth() === month &&
+                        eventDate.getFullYear() === year;
                 });
-                
+
                 if (hasEvent) {
                     dayElement.classList.add('event-day');
-                    
+
                     // Add click event to show event details
                     dayElement.addEventListener('click', () => {
                         const eventDate = new Date(year, month, day);
@@ -1451,13 +1515,13 @@
                             const eventStartDate = new Date(event.startDate);
                             return eventStartDate.toDateString() === eventDate.toDateString();
                         });
-                        
+
                         if (eventOnThisDay) {
                             selectEvent(eventOnThisDay);
                         }
                     });
                 }
-                
+
                 calendarGrid.appendChild(dayElement);
             }
         }
@@ -1465,20 +1529,20 @@
         // Handle form submission
         function handleFormSubmit(e) {
             e.preventDefault();
-            
+
             // Validate form
             let isValid = true;
             const requiredFields = [
-                'eventName', 'community', 'location', 
-                'startDate', 'endDate', 
-                'startTime', 'endTime', 
+                'eventName', 'community', 'location',
+                'startDate', 'endDate',
+                'startTime', 'endTime',
                 'description'
             ];
-            
+
             requiredFields.forEach(fieldId => {
                 const field = document.getElementById(fieldId);
                 const errorElement = document.getElementById(`${fieldId}Error`);
-                
+
                 if (!field.value) {
                     errorElement.style.display = 'block';
                     isValid = false;
@@ -1486,9 +1550,9 @@
                     errorElement.style.display = 'none';
                 }
             });
-            
+
             if (!isValid) return;
-            
+
             // Create new event
             const newEvent = {
                 id: events.length + 1,
@@ -1500,17 +1564,17 @@
                 startTime: document.getElementById('startTime').value,
                 endTime: document.getElementById('endTime').value,
                 description: document.getElementById('description').value,
-                image: document.getElementById('eventImage').files[0] ? 
-                      URL.createObjectURL(document.getElementById('eventImage').files[0]) : 
-                      "https://via.placeholder.com/600x300?text=Event",
+                image: document.getElementById('eventImage').files[0] ?
+                    URL.createObjectURL(document.getElementById('eventImage').files[0]) :
+                    "https://via.placeholder.com/600x300?text=Event",
                 participants: 0,
                 joined: false,
                 members: [],
                 chats: []
             };
-            
+
             events.push(newEvent);
-            
+
             // Create new campaign
             const newCampaign = {
                 id: campaigns.length + 1,
@@ -1520,22 +1584,22 @@
                 endDate: document.getElementById('endDate').value,
                 participants: 0
             };
-            
+
             campaigns.push(newCampaign);
-            
+
             // Reset form and close modal
             resetForm();
             createModal.style.display = 'none';
-            
+
             // Update UI
             renderEvents();
             renderUpcomingEvents();
             renderCampaigns();
             generateCalendar(currentMonth, currentYear);
-            
+
             // Select the new event
             selectEvent(newEvent);
-            
+
             // Add announcement to chat
             const newChatMessage = {
                 id: newEvent.chats.length + 1,
@@ -1548,7 +1612,7 @@
             newEvent.chats.push(newChatMessage);
             renderChatMessages(newEvent.chats);
             chatContainer.scrollTop = chatContainer.scrollHeight;
-            
+
             alert('Campaign berhasil dibuat dan ditambahkan ke Event Mendatang!');
         }
 
@@ -1556,7 +1620,7 @@
         function resetForm() {
             campaignForm.reset();
             document.getElementById('community').value = "Peduli_Mks";
-            
+
             // Hide all error messages
             document.querySelectorAll('.error-message').forEach(el => {
                 el.style.display = 'none';
@@ -1565,5 +1629,13 @@
         // Initialize the application
         document.addEventListener('DOMContentLoaded', init);
     </script>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Tim Creator 🌱. All rights reserved.</p>
+        </div>
+    </footer>
 </body>
+
 </html>

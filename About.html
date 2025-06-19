@@ -12,9 +12,9 @@
 <body class="bg-green-50 text-gray-800 flex flex-col min-h-screen">
   <!-- NAVBAR ATAS SAMA PERSIS DENGAN COMMUNITY DAN CAMPAIGN -->
   <nav
-    style="width:100vw; height:60px; background:#2e944b; display:flex; align-items:center; justify-content:space-between; position:fixed; top:0; left:0; z-index:100; box-shadow:0 2px 8px rgba(46,148,75,0.08);">
+    style="width:100vw; height:60px; background:#285C37; display:flex; align-items:center; justify-content:space-between; position:fixed; top:0; left:0; z-index:100; box-shadow:0 2px 8px rgba(40,92,55,0.08);">
     <button onclick="window.history.back()"
-      style="margin-left:24px; background:#fff; color:#2e944b; border:2px solid #2e944b; border-radius:8px; padding:8px 22px 8px 14px; font-weight:600; font-size:1.1rem; display:flex; align-items:center; gap:6px; box-shadow:0 2px 8px rgba(46,148,75,0.07); cursor:pointer; transition:background 0.15s, color 0.15s;">
+      style="margin-left:24px; background:#fff; color:#285C37; border:2px solid #285C37; border-radius:8px; padding:8px 22px 8px 14px; font-weight:600; font-size:1.1rem; display:flex; align-items:center; gap:6px; box-shadow:0 2px 8px rgba(40,92,55,0.07); cursor:pointer; transition:background 0.15s, color 0.15s;">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="22"
         height="22">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
@@ -109,7 +109,8 @@
           </div>
           <!-- Anggota 3 -->
           <div class="flex flex-col items-center bg-white rounded-xl shadow p-4 w-full">
-            <img src="Gambar/mike.jpg" alt="Mike" class="w-20 h-20 rounded-full border-2 border-[#678E34] object-cover mb-2" />
+            <img src="Gambar/mike.jpg" alt="Mike"
+              class="w-20 h-20 rounded-full border-2 border-[#678E34] object-cover mb-2" />
             <div class="text-center">
               <div class="font-bold">Mike</div>
               <div class="text-xs text-gray-600">Developer Back-End & Database Engineer 📖</div>
@@ -126,7 +127,8 @@
           </div>
           <!-- Anggota 5 -->
           <div class="flex flex-col items-center bg-white rounded-xl shadow p-4 w-full">
-            <img src="Gambar/dew.png" alt="Dew" class="w-20 h-20 rounded-full border-2 border-[#678E34] object-cover mb-2" />
+            <img src="Gambar/dew.png" alt="Dew"
+              class="w-20 h-20 rounded-full border-2 border-[#678E34] object-cover mb-2" />
             <div class="text-center">
               <div class="font-bold">Dew</div>
               <div class="text-xs text-gray-600">Project Coordinator & Public Relations 🦄</div>
@@ -177,12 +179,24 @@
     </div>
   </main>
 
-  <!-- Footer tetap di dasar viewport -->
-  <footer class="bg-green-100 py-4 fixed bottom-0 left-0 w-full shadow-md">
+  <!-- Footer copyright, hanya muncul saat scroll ke bawah -->
+  <footer id="copyrightFooter" class="bg-green-100 py-4 w-full shadow-md" style="display:none; position:fixed; left:0; bottom:0; z-index:40;">
     <div class="container mx-auto px-4 text-center text-sm text-gray-600">
       &copy; 2025 Tim Creator 🌱. All rights reserved.
     </div>
   </footer>
+
+  <script>
+    // Tampilkan copyrightFooter hanya jika user scroll ke bawah (nyampe bawah halaman)
+    window.addEventListener('scroll', function() {
+      var copyright = document.getElementById('copyrightFooter');
+      if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 2) {
+        copyright.style.display = 'block';
+      } else {
+        copyright.style.display = 'none';
+      }
+    });
+  </script>
 </body>
 
 </html>

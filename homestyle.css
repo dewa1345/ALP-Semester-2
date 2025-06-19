@@ -18,23 +18,28 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 50px;
+  height: 60px;
+  /* Ubah jadi 60px agar sama dengan Community */
   padding: 0 2rem;
-  background-color: var(--green-dark);
+  background-color: #235b37;
+  /* hijau gelap sesuai gambar */
   color: var(--white);
   overflow: visible;
 }
+
 .message img {
-    max-width: 100%;
-    margin-top: 5px;
-    border-radius: 8px;
-  }
+  max-width: 100%;
+  margin-top: 5px;
+  border-radius: 8px;
+}
 
 .logo-text {
   font-size: 28px;
   font-weight: bold;
-  color: #a2ca6c; /* Hijau tua, bisa kamu sesuaikan */
-  font-family: 'Poppins', sans-serif; /* Gaya font opsional */
+  color: #a2ca6c;
+  /* Hijau tua, bisa kamu sesuaikan */
+  font-family: 'Poppins', sans-serif;
+  /* Gaya font opsional */
 }
 
 .logo {
@@ -99,8 +104,13 @@ nav a {
 }
 
 @keyframes scroll-left {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 .dots {
@@ -129,12 +139,16 @@ nav a {
 /* Community Section */
 top-community {
   display: flex;
-  flex-wrap: wrap; 
-  gap: 20px; /* jarak antar card */
+  flex-wrap: wrap;
+  gap: 20px;
+  /* jarak antar card */
   padding: 20px;
+  margin-bottom: 120px;
 }
+
 .top-community-title {
-  margin-left: 50px; /* geser tulisan ke kanan */
+  margin-left: 50px;
+  /* geser tulisan ke kanan */
   margin-top: 30px;
   font-size: 24px;
   color: var(--green-dark);
@@ -147,6 +161,7 @@ top-community {
   margin-top: 20px;
   padding-left: 30px;
 }
+
 .community-card {
   background-color: #c9f9c9;
   border-radius: 15px;
@@ -209,6 +224,7 @@ top-community {
   gap: 10px;
   margin-top: 10px;
 }
+
 .btn-love,
 .btn-join {
   width: 36px;
@@ -339,3 +355,22 @@ top-community {
   font-size: 14px;
 }
 
+/* Footer */
+footer {
+  background-color: #d6fbe7;
+  min-height: 35px;
+  /* diperkecil dari 60px */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  box-shadow: 0 2px 8px rgba(46, 148, 75, 0.08);
+}
+
+footer span {
+  color: #222;
+  font-size: 0.75rem;
+  /* diperkecil dari 0.95rem */
+  font-family: 'Segoe UI', sans-serif;
+  letter-spacing: 0.5px;
+}
