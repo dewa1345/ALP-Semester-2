@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title> Community</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="communityData.js"></script>
     <style>
         .bubble-chat {
             position: relative;
@@ -746,21 +747,44 @@
                     addCommunity();
                 }
                 function addCommunity() {
-                    const key = namakomunitas.replace(/\s+/g, '_') + '_' + Date.now();
-                    communities[key] = {
+                    // Use the shared CommunityManager to add the new community
+                    const communityData = {
                         name: namakomunitas,
                         description: deskripsi,
+                        image: logoUrl,
                         events: campaign,
-                        members: [{ name: nama, avatar: 'https://ui-avatars.com/api/?name=' + encodeURIComponent(nama) + '&background=678E34&color=fff&rounded=true&size=48' }],
-                        logo: logoUrl
+                        members: [{
+                            name: nama,
+                            avatar: 'https://ui-avatars.com/api/?name=' + encodeURIComponent(nama) + '&background=678E34&color=fff&rounded=true&size=48'
+                        }]
                     };
-                    //  logo custom di localStorage agar tetap muncul setelah reload
-                    let customLogos = JSON.parse(localStorage.getItem('customCommunityLogos') || '{}');
-                    customLogos[key] = logoUrl;
-                    localStorage.setItem('customLogos', JSON.stringify(customLogos));
-                    closeCreateCommunityModal();
-                    renderCommunityList();
-                    selectCommunity(key);
+
+                    const key = window.communityManager.addCommunity(communityData);
+
+                    if (key) {
+                        // Update local communities object for current page compatibility
+                        communities[key] = {
+                            name: namakomunitas,
+                            description: deskripsi,
+                            events: campaign,
+                            members: communityData.members,
+                            logo: logoUrl
+                        };
+
+                        //  logo custom di localStorage agar tetap muncul setelah reload
+                        let customLogos = JSON.parse(localStorage.getItem('customCommunityLogos') || '{}');
+                        customLogos[key] = logoUrl;
+                        localStorage.setItem('customCommunityLogos', JSON.stringify(customLogos));
+
+                        closeCreateCommunityModal();
+                        renderCommunityList();
+                        selectCommunity(key);
+
+                        // Show success message
+                        alert('Komunitas berhasil dibuat! Komunitas baru akan muncul di homepage.');
+                    } else {
+                        alert('Gagal membuat komunitas. Silakan coba lagi.');
+                    }
                 }
             };
         }
