@@ -287,7 +287,7 @@
                             <li><button
                                     class="w-full flex items-center gap-3 text-left px-3 py-2 rounded hover:bg-green-100"
                                     onclick="selectCommunity('HijauBersama')"><img
-                                        src="https://dispendik.surabaya.go.id/wp-content/uploads/2015/03/banu-smp-pgri-6.jpg"
+                                        src="https://dlh.banyuwangikab.go.id/storage/blog/thumbnail/FYs2IWNLc6rdGow857hm4q1dwhZuH0wjG71phibc.jpg"
                                         alt="HijauBersama" class="w-8 h-8 rounded object-cover">HijauBersama</button>
                             </li>
                             <li><button
@@ -527,27 +527,55 @@
         };
 
         let selectedCommunityKey = null;
-        let joinedCommunities = JSON.parse(localStorage.getItem('joinedCommunities') || '[]');
 
-        function renderCommunityList() {
+        // Use communityManager from communityData.js for consistency
+        function getJoinedCommunities() {
+            return window.communityManager ? window.communityManager.getJoinedCommunities() : [];
+        }
+
+        function getAllCommunities() {
+            return window.communityManager ? window.communityManager.getAllCommunities() : {};
+        } function renderCommunityList() {
+            console.log('renderCommunityList called'); // Debug log
             const list = document.getElementById('communityList');
+            console.log('Community list element found:', list); // Debug log
             if (!list) return;
+
+            // Get communities from communityManager instead of local object
+            const allCommunities = getAllCommunities();
+            const joinedCommunities = getJoinedCommunities();
+
+            // Merge with local communities object for backward compatibility
+            const mergedCommunities = { ...communities, ...allCommunities };
+
+            console.log('Merged communities:', Object.keys(mergedCommunities)); // Debug log
+            console.log('Joined communities:', joinedCommunities); // Debug log
+
             // Pengurutan Komunitas
-            let keys = Object.keys(communities);
+            let keys = Object.keys(mergedCommunities);
+
             if (selectedCommunityKey && joinedCommunities.includes(selectedCommunityKey)) {
                 keys = [selectedCommunityKey, ...joinedCommunities.filter(k => k !== selectedCommunityKey), ...keys.filter(k => !joinedCommunities.includes(k) && k !== selectedCommunityKey)];
             } else {
                 keys = [...joinedCommunities, ...keys.filter(k => !joinedCommunities.includes(k))];
             }
+
             let customLogos = {};
             try { customLogos = JSON.parse(localStorage.getItem('customCommunityLogos') || '{}'); } catch { }
-            list.innerHTML = keys.map(key => {
-                const c = communities[key];
+
+            const htmlContent = keys.map(key => {
+                const c = mergedCommunities[key];
+                if (!c) {
+                    console.warn('Community not found for key:', key);
+                    return '';
+                }
                 const joined = joinedCommunities.includes(key);
                 // ga,mbar sebelumnya
                 let imgUrl = '';
                 if (customLogos[key]) {
                     imgUrl = customLogos[key];
+                } else if (c.image) {
+                    imgUrl = c.image;
                 } else {
                     switch (key) {
                         case 'Peduli_Mks': imgUrl = 'https://lppm.unusa.ac.id/wp-content/uploads/2023/09/Picture1.png'; break;
@@ -569,68 +597,125 @@
             ${joined ? '<span class=\'ml-2 px-2 py-0.5 rounded-full bg-[#678E34] text-white text-xs\'>Joined</span>' : ''}
         </button></li>`;
             }).join('');
-        }
 
-        function selectCommunity(key) {
-            const c = communities[key];
-            if (!c) return;
+            console.log('Generated HTML length:', htmlContent.length); // Debug log
+            list.innerHTML = htmlContent;
+            console.log('Community list updated'); // Debug log
+        } function selectCommunity(key) {
+            console.log('selectCommunity called with key:', key); // Debug log
+
+            // Validate input
+            if (!key || typeof key !== 'string') {
+                console.error('Invalid community key:', key);
+                return;
+            }
+
+            // Get communities from merged data
+            const allCommunities = getAllCommunities();
+            const mergedCommunities = { ...communities, ...allCommunities };
+            const joinedCommunities = getJoinedCommunities();
+
+            const c = mergedCommunities[key];
+            console.log('Community data found:', c); // Debug log
+            if (!c) {
+                console.error('Community not found for key:', key);
+                return;
+            }
+
             selectedCommunityKey = key;
             renderCommunityList();
-            document.getElementById('communityContent').innerHTML = `
-        <h2 class="text-2xl font-bold text-[#678E34] mb-2">${c.name}</h2>
-        <p class="mb-4 text-gray-700">${c.description}</p>
-        <div class="mb-4">
-          <h3 class="font-semibold text-lg mb-1">Event Komunitas</h3>
-          <ul class="list-disc pl-6 text-gray-700">
-            ${c.events.map(e => `<li>${e}</li>`).join('')}
-          </ul>
-        </div>
-        <div class="mb-6">
-          <h3 class="font-semibold text-lg mb-1">Anggota Komunitas</h3>
-          <ul class="flex flex-wrap gap-2 mb-4">
-            ${c.members.map(m => `<li class="bg-green-100 text-[#678E34] px-3 py-1 rounded-full text-sm">${m.name}</li>`).join('')}
-          </ul>
-          <div class="flex flex-wrap gap-4 mb-2">
-            ${c.members.map(m => `<img src="${m.avatar}" alt="${m.name}" class="w-12 h-12 object-cover rounded-full border-2 border-[#678E34]" onerror="this.onerror=null;this.src='https://cdn-icons-png.flaticon.com/512/3135/3135715.png';" />`).join('')}
-          </div>
-        </div>
-        <div class="mb-20">
-          <h3 class="font-semibold text-lg mb-2">Chat Komunitas</h3>
-          <div class="bg-green-50 border border-green-200 rounded-lg p-3 h-40 overflow-y-auto mb-2" id="chatBox">
-            <div class="text-gray-400 text-sm text-center">Belum ada pesan. Mulai chat dengan komunitas!</div>
-          </div>
-          <div class="flex gap-2">
-            <input id="chatInput" type="text" class="flex-1 border rounded px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-[#678E34]" placeholder="Ketik pesan...">
-            <button onclick="sendChat()" class="bg-[#678E34] text-white px-4 py-1 rounded hover:bg-[#4a6b24]">Kirim</button>
-          </div>
-        </div>
-        ${joinedCommunities.includes(key) ? `<button onclick="leaveCommunity('${key}')" id="leaveBtn" class="fixed bottom-8 right-8 bg-red-600 text-white px-6 py-3 rounded-full shadow-lg font-bold text-lg hover:bg-red-800 z-[100]">Leave Komunitas</button>` : `<button onclick="joinCommunity('${key}')" id="joinBtn" class="fixed bottom-8 right-8 bg-[#678E34] text-white px-6 py-3 rounded-full shadow-lg font-bold text-lg hover:bg-[#4a6b24] z-[100]">Join Komunitas</button>`}
-      `;
-            setTimeout(() => {
-                const chatInput = document.getElementById('chatInput');
-                if (chatInput) {
-                    chatInput.addEventListener('keydown', function (e) {
-                        if (e.key === 'Enter') {
-                            sendChat();
-                        }
-                    });
-                }
-                renderChatHistory();
-            }, 100);
+
+            console.log('Updating community content...'); // Debug log
+            const contentElement = document.getElementById('communityContent');
+            console.log('Content element found:', contentElement); // Debug log
+
+            if (!contentElement) {
+                console.error('communityContent element not found!');
+                return;
+            }
+
+            try {
+                const htmlContent = `
+                <h2 class="text-2xl font-bold text-[#678E34] mb-2">${c.name}</h2>
+                <p class="mb-4 text-gray-700">${c.description}</p>
+                <div class="mb-4">
+                  <h3 class="font-semibold text-lg mb-1">Event Komunitas</h3>
+                  <ul class="list-disc pl-6 text-gray-700">
+                    ${c.events.map(e => `<li>${e}</li>`).join('')}
+                  </ul>
+                </div>
+                <div class="mb-6">
+                  <h3 class="font-semibold text-lg mb-1">Anggota Komunitas</h3>
+                  <ul class="flex flex-wrap gap-2 mb-4">
+                    ${c.members.map(m => `<li class="bg-green-100 text-[#678E34] px-3 py-1 rounded-full text-sm">${m.name}</li>`).join('')}
+                  </ul>
+                  <div class="flex flex-wrap gap-4 mb-2">
+                    ${c.members.map(m => `<img src="${m.avatar}" alt="${m.name}" class="w-12 h-12 object-cover rounded-full border-2 border-[#678E34]" onerror="this.onerror=null;this.src='https://cdn-icons-png.flaticon.com/512/3135/3135715.png';" />`).join('')}
+                  </div>
+                </div>
+                <div class="mb-20">
+                  <h3 class="font-semibold text-lg mb-2">Chat Komunitas</h3>
+                  <div class="bg-green-50 border border-green-200 rounded-lg p-3 h-40 overflow-y-auto mb-2" id="chatBox">
+                    <div class="text-gray-400 text-sm text-center">Belum ada pesan. Mulai chat dengan komunitas!</div>
+                  </div>
+                  <div class="flex gap-2">
+                    <input id="chatInput" type="text" class="flex-1 border rounded px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-[#678E34]" placeholder="Ketik pesan...">
+                    <button onclick="sendChat()" class="bg-[#678E34] text-white px-4 py-1 rounded hover:bg-[#4a6b24]">Kirim</button>
+                  </div>
+                </div>
+                ${joinedCommunities.includes(key) ? `<button onclick="leaveCommunity('${key}')" id="leaveBtn" class="fixed bottom-8 right-8 bg-red-600 text-white px-6 py-3 rounded-full shadow-lg font-bold text-lg hover:bg-red-800 z-[100]">Leave Komunitas</button>` : `<button onclick="joinCommunity('${key}')" id="joinBtn" class="fixed bottom-8 right-8 bg-[#678E34] text-white px-6 py-3 rounded-full shadow-lg font-bold text-lg hover:bg-[#4a6b24] z-[100]">Join Komunitas</button>`}
+              `;
+
+                contentElement.innerHTML = htmlContent;
+                console.log('Content updated successfully'); // Debug log
+
+                setTimeout(() => {
+                    const chatInput = document.getElementById('chatInput');
+                    if (chatInput) {
+                        chatInput.addEventListener('keydown', function (e) {
+                            if (e.key === 'Enter') {
+                                sendChat();
+                            }
+                        });
+                    }
+                    renderChatHistory();
+                }, 100);
+
+            } catch (error) {
+                console.error('Error updating community content:', error);
+            }
         }
 
         function joinCommunity(key) {
-            if (!joinedCommunities.includes(key)) {
-                joinedCommunities.unshift(key);
-                localStorage.setItem('joinedCommunities', JSON.stringify(joinedCommunities));
+            if (!window.communityManager) {
+                console.error('CommunityManager not available');
+                return;
             }
+
+            console.log('Joining community:', key); // Debug log
+            const isJoined = window.communityManager.toggleJoinCommunity(key);
+
+            if (isJoined) {
+                console.log('Successfully joined community:', key); // Debug log
+            }
+
             selectCommunity(key);
             renderCommunityList();
         }
 
         function leaveCommunity(key) {
-            joinedCommunities = joinedCommunities.filter(k => k !== key);
-            localStorage.setItem('joinedCommunities', JSON.stringify(joinedCommunities));
+            if (!window.communityManager) {
+                console.error('CommunityManager not available');
+                return;
+            }
+
+            console.log('Leaving community:', key); // Debug log
+            const isJoined = window.communityManager.toggleJoinCommunity(key);
+
+            if (!isJoined) {
+                console.log('Successfully left community:', key); // Debug log
+            }
+
             renderCommunityList();
             selectCommunity(key);
         }
@@ -794,11 +879,59 @@
             createBtn.setAttribute('onclick', 'openCreateCommunityModal()');
         }
         // Inisialisasi sidebar komunitas saat load
-        window.onload = function () {
+        document.addEventListener('DOMContentLoaded', function () {
+            console.log('DOM Content Loaded, initializing community list...'); // Debug log
+
+            // Wait for communityManager to be available
+            if (!window.communityManager) {
+                console.log('Waiting for communityManager to load...'); // Debug log
+                setTimeout(() => {
+                    initializeCommunityPage();
+                }, 100);
+            } else {
+                initializeCommunityPage();
+            }
+        });
+
+        function initializeCommunityPage() {
+            console.log('Initializing community page...'); // Debug log
+
+            const allCommunities = getAllCommunities();
+            const joinedCommunities = getJoinedCommunities();
+
+            console.log('All communities:', Object.keys(allCommunities)); // Debug log
+            console.log('Joined communities:', joinedCommunities); // Debug log
+
+            // Clear existing content first
+            const list = document.getElementById('communityList');
+            if (list) {
+                list.innerHTML = '';
+                console.log('Cleared existing community list content'); // Debug log
+            }
+
             renderCommunityList();
-            // Jika ada komunitas yang sudah join, naik jadi yang pertama/paling atas
+
+            // Auto-select first joined community or first available community
             if (joinedCommunities.length > 0) {
+                console.log('Auto-selecting first joined community:', joinedCommunities[0]); // Debug log
                 selectCommunity(joinedCommunities[0]);
+            } else {
+                // Auto-select first community for testing
+                const mergedCommunities = { ...communities, ...allCommunities };
+                const firstKey = Object.keys(mergedCommunities)[0];
+                if (firstKey) {
+                    console.log('Auto-selecting first community for testing:', firstKey); // Debug log
+                    selectCommunity(firstKey);
+                }
+            }
+        }
+
+        window.onload = function () {
+            console.log('Window loaded (backup)...'); // Debug log
+            // Backup in case DOMContentLoaded doesn't fire
+            if (!document.getElementById('communityList').innerHTML.trim()) {
+                console.log('Community list still empty, re-initializing...'); // Debug log
+                initializeCommunityPage();
             }
         };
 
@@ -816,6 +949,15 @@
             }
             lastScrollY = window.scrollY;
         });
+
+        // Test function to manually trigger community selection
+        function testCommunitySelection() {
+            console.log('Manual test: selecting Peduli_Mks community');
+            selectCommunity('Peduli_Mks');
+        }
+
+        // Make test function available globally for debugging
+        window.testCommunitySelection = testCommunitySelection;
     </script>
 </body>
 

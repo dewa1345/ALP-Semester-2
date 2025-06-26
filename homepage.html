@@ -182,12 +182,6 @@
       /* Prevent text from intercepting clicks */
     }
 
-    .create-community-btn:hover {
-      background-color: #45a049 !important;
-      transform: translateY(-1px);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-    }
-
     .community-scroll-container {
       position: relative;
     }
@@ -234,13 +228,10 @@
 <body style="min-height:100vh; display:flex; flex-direction:column;">
 
   <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
-<df-messenger
-  chat-icon="https:&#x2F;&#x2F;freeimghost.net&#x2F;images&#x2F;2025&#x2F;06&#x2F;19&#x2F;text-message-icon-png-10-removebg-preview-1.th.png"
-  intent="WELCOME"
-  chat-title="Ecobot"
-  agent-id="109a0375-027d-4ba9-b875-52b9f3220ef1"
-  language-code="id"
-></df-messenger>
+  <df-messenger
+    chat-icon="https:&#x2F;&#x2F;freeimghost.net&#x2F;images&#x2F;2025&#x2F;06&#x2F;19&#x2F;text-message-icon-png-10-removebg-preview-1.th.png"
+    intent="WELCOME" chat-title="Ecobot" agent-id="109a0375-027d-4ba9-b875-52b9f3220ef1"
+    language-code="id"></df-messenger>
   <header>
     <div class="logo" style="font-family: 'Poppins', sans-serif;">
       EcoV
@@ -284,14 +275,11 @@
     </section>
 
     <section class="top-community">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+      <div style="margin-bottom: 20px;">
         <div>
           <h2 class="top-title" style="margin: 0;">Top Community</h2>
           <p id="communityCount" style="font-size: 12px; color: #666; margin: 5px 0 0 30px;">Loading...</p>
         </div>
-        <a href="Community.html" class="create-community-btn"
-          style="background-color: #4CAF50; color: white; padding: 8px 16px; border-radius: 20px; text-decoration: none; font-size: 14px; font-weight: 600; transition: background-color 0.2s ease;">+
-          Buat Komunitas</a>
       </div>
       <div class="community-scroll-container">
         <button class="scroll-arrow left" id="scrollLeft">‹</button>
@@ -395,10 +383,10 @@
         <p>${community.name}</p>
         <div class="card-buttons">
           <button class="btn-love ${isFavorite ? 'favorited' : ''}" data-community-key="${community.key}">
-            <img src="${isFavorite ? 'Yellow_star.png' : 'Black_star.png'}" alt="star" class="icon-star" />
+            <img src="${isFavorite ? 'Gambar/Yellow_star.png' : 'Gambar/Black_star.png'}" alt="star" class="icon-star" />
           </button>
           <button class="btn-join ${isJoined ? 'joined' : ''}" data-community-key="${community.key}">
-            <img src="Centang.png" alt="centang" class="icon-plus" style="display:${isJoined ? 'inline' : 'none'};">
+            <img src="Gambar/Centang.png" alt="centang" class="icon-plus" style="display:${isJoined ? 'inline' : 'none'};">
             <span class="plus-text" style="display:${isJoined ? 'none' : 'inline'};">+</span>
           </button>
         </div>
@@ -450,14 +438,14 @@
 
           const img = target.querySelector('img');
           if (img) {
-            const newSrc = isFavorite ? 'Yellow_star.png' : 'Black_star.png';
+            const newSrc = isFavorite ? 'Gambar/Yellow_star.png' : 'Gambar/Black_star.png';
             img.src = newSrc;
             console.log('Changed image src to:', newSrc); // Debug log
 
             // Force image reload if needed
             img.onerror = function () {
               console.error('Failed to load image:', newSrc);
-              this.src = isFavorite ? './Yellow_star.png' : './Black_star.png';
+              this.src = isFavorite ? './Gambar/Yellow_star.png' : './Gambar/Black_star.png';
             };
           } else {
             console.error('Image element not found in love button');
