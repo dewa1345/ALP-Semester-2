@@ -4,8 +4,54 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Homepage Komunitas</title>
+  <title>Homepage</title>
   <link rel="stylesheet" href="homestyle.css" />
+  <style>
+    .icon-star,
+    .icon-plus {
+      width: 20px;
+      height: 20px;
+    }
+
+    .top-title {
+      font-size: 24px;
+      color: #1e5631;
+      margin-bottom: 20px;
+      padding-left: 30px;
+    }
+
+    .top-community {
+      padding: 40px 30px;
+    }
+
+    .community-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: flex-start;
+      padding-left: 30px;
+    }
+
+    .community-card {
+      background-color: #c9f9c9;
+      border-radius: 15px;
+      padding: 10px;
+      width: 180px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-buttons button {
+      background-color: #F6F4DC;
+      position: relative;
+      z-index: 2;
+      /* tombol join di atas footer */
+    }
+
+    .plus-text {
+      color: #000;
+    }
+  </style>
 </head>
 
 <body style="min-height:100vh; display:flex; flex-direction:column;">
@@ -13,22 +59,20 @@
     <div class="logo" style="font-family: 'Poppins', sans-serif;">
       EcoV
     </div>
-
-
     <div class="nav-profile-container">
       <nav>
         <a href="#">Home</a>
         <a href="about.html">About Us</a>
         <a href="community.html">Community</a>
-        <a href="CCampaign.html">Campaign</a>
+        <a href="Campaign.html">Campaign</a>
       </nav>
-      <a href="profile.html" class="profile-icon">👤</a>
+      <a href="Profile.html" class="profile-icon">👤</a>
     </div>
   </header>
 
   <main style="flex:1;">
     <section class="carousel">
-      <div class="carousel-overlay"></div> <!-- Lapisan gelap -->
+      <div class="carousel-overlay"></div>
       <div class="carousel-track" id="carouselTrack">
         <img src="Gambar/event1.jpeg" alt="slide 1" />
         <img src="Gambar/event2.jpg" alt="slide 2" />
@@ -36,7 +80,6 @@
         <img src="Gambar/event4.jpeg" alt="slide 4" />
         <img src="Gambar/event5.jpeg" alt="slide 5" />
         <img src="Gambar/event6.jpg" alt="slide 6" />
-        <!-- Duplikasi untuk loop -->
         <img src="Gambar/event1.jpeg" alt="slide 1" />
         <img src="Gambar/event2.jpg" alt="slide 2" />
         <img src="Gambar/event3.jpeg" alt="slide 3" />
@@ -54,18 +97,17 @@
       </div>
     </section>
 
-
     <section class="top-community">
       <h2 class="top-title">Top Community</h2>
-
-
       <div class="community-container">
+        <!-- 5 Kartu Komunitas -->
         <div class="community-card">
           <img src="Gambar/commu1.jpeg" alt="comm 1" />
           <p>Pandawara</p>
           <div class="card-buttons">
-            <button class="btn-love">❤️</button>
-            <button class="btn-join">+</button>
+            <button class="btn-love"><img src="Black_star.png" alt="star" class="icon-star" /></button>
+            <button class="btn-join"><img src="Centang.png" alt="centang" class="icon-plus" style="display:none;"><span
+                class="plus-text">+</span></button>
           </div>
         </div>
 
@@ -73,8 +115,9 @@
           <img src="Gambar/commu2.jpg" alt="comm 2" />
           <p>R3 Community</p>
           <div class="card-buttons">
-            <button class="btn-love">❤️</button>
-            <button class="btn-join">+</button>
+            <button class="btn-love"><img src="Black_star.png" alt="star" class="icon-star" /></button>
+            <button class="btn-join"><img src="Centang.png" alt="centang" class="icon-plus" style="display:none;"><span
+                class="plus-text">+</span></button>
           </div>
         </div>
 
@@ -82,8 +125,9 @@
           <img src="Gambar/commu3.jpeg" alt="comm 3" />
           <p>Recycle.id</p>
           <div class="card-buttons">
-            <button class="btn-love">❤️</button>
-            <button class="btn-join">+</button>
+            <button class="btn-love"><img src="Black_star.png" alt="star" class="icon-star" /></button>
+            <button class="btn-join"><img src="Centang.png" alt="centang" class="icon-plus" style="display:none;"><span
+                class="plus-text">+</span></button>
           </div>
         </div>
 
@@ -91,8 +135,9 @@
           <img src="Gambar/commu4.jpeg" alt="comm 4" />
           <p>CleanUp</p>
           <div class="card-buttons">
-            <button class="btn-love">❤️</button>
-            <button class="btn-join">+</button>
+            <button class="btn-love"><img src="Black_star.png" alt="star" class="icon-star" /></button>
+            <button class="btn-join"><img src="Centang.png" alt="centang" class="icon-plus" style="display:none;"><span
+                class="plus-text">+</span></button>
           </div>
         </div>
 
@@ -100,37 +145,52 @@
           <img src="Gambar/commu5.jpg" alt="comm 5" />
           <p>Cinta Lingkungan</p>
           <div class="card-buttons">
-            <button class="btn-love">❤️</button>
-            <button class="btn-join">+</button>
+            <button class="btn-love"><img src="Black_star.png" alt="star" class="icon-star" /></button>
+            <button class="btn-join"><img src="Centang.png" alt="centang" class="icon-plus" style="display:none;"><span
+                class="plus-text">+</span></button>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Tombol buka chat -->
     <div class="chatbot-button" id="openChat">💬</div>
-
-    <!-- Popup Chatbot -->
     <div id="chatPopup">
-      <div id="chatHeader">
-        ChatBot
-        <span id="closeChat" style="cursor:pointer;">❌</span>
-      </div>
+      <div id="chatHeader">ChatBot<span id="closeChat" style="cursor:pointer;">❌</span></div>
       <div id="chatMessages"></div>
       <form id="chatForm">
         <input type="text" id="chatInput" placeholder="Ketik pesan..." />
         <button type="submit">Kirim</button>
       </form>
     </div>
-
-    <!-- Nama pengguna tersembunyi -->
     <span id="username" style="display: none;">Dewa</span>
   </main>
+
   <footer class="bg-green-100 py-4 w-full shadow-md flex items-center justify-center">
     <span class="text-center text-sm text-gray-600">&copy; 2025 Tim Creator 🌱. All rights reserved.</span>
   </footer>
 
   <script src="homescript.js"></script>
+  <script>
+    document.querySelectorAll('.btn-love').forEach(btn => {
+      const img = btn.querySelector('img');
+      let isFavorite = false;
+      btn.addEventListener('click', () => {
+        isFavorite = !isFavorite;
+        img.src = isFavorite ? 'Yellow_star.png' : 'Black_star.png';
+      });
+    });
+
+    document.querySelectorAll('.btn-join').forEach(btn => {
+      const img = btn.querySelector('img');
+      const plus = btn.querySelector('.plus-text');
+      let isJoined = false;
+      btn.addEventListener('click', () => {
+        isJoined = !isJoined;
+        img.style.display = isJoined ? 'inline' : 'none';
+        plus.style.display = isJoined ? 'none' : 'inline';
+      });
+    });
+  </script>
 </body>
 
 </html>

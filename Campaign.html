@@ -21,17 +21,19 @@
 
         /* Navbar Styles */
         .navbar {
-            width: 100vw;
+            width: 100% !important;
             height: 60px;
-            background: #235c37;
+            background: #339551;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 100;
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            z-index: 1000 !important;
             box-shadow: 0 2px 8px rgba(46, 148, 75, 0.08);
+            transition: transform 0.3s ease;
         }
 
         .navbar button {
@@ -141,6 +143,10 @@
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             padding: 25px;
             position: relative;
+            padding-bottom: 48px;
+            /* Tambahan agar konten tidak tertutup footer */
+            margin-bottom: 56px;
+            /* Supaya kotak main-content tidak tertutup footer */
         }
 
         .community-header {
@@ -306,6 +312,7 @@
         .chat-input {
             display: flex;
             gap: 10px;
+            margin-bottom: 40px;
         }
 
         .chat-input input {
@@ -704,19 +711,20 @@
         .footer {
             background-color: #defced;
             color: #222;
-            padding: 10px 0;
+            padding: 4px 0;
             text-align: center;
             position: fixed;
             left: 0;
             bottom: 0;
             width: 100vw;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            font-size: 0.95rem;
+            font-size: 0.8rem;
             box-shadow: none;
             z-index: 200;
             display: flex;
             align-items: center;
             justify-content: center;
+            min-height: 32px;
         }
 
         .footer .container {
@@ -730,7 +738,7 @@
 
         .footer p {
             margin: 0;
-            font-size: 0.95rem;
+            font-size: 0.8rem;
             color: #222;
             letter-spacing: 0.5px;
             text-align: center;
@@ -929,7 +937,7 @@
                 participants: 42,
                 joined: false,
                 members: [
-                    { name: "Alya", avatar: "https://randomuser.me/api/portraits/women/44.jpg" },
+                    { name: "Enjay", avatar: "https://randomuser.me/api/portraits/women/44.jpg" },
                     { name: "Raka", avatar: "https://randomuser.me/api/portraits/men/32.jpg" },
                     { name: "Bimo", avatar: "https://randomuser.me/api/portraits/men/22.jpg" },
                     { name: "Dewi", avatar: "https://randomuser.me/api/portraits/women/33.jpg" },
@@ -939,7 +947,7 @@
                 chats: [
                     {
                         id: 1,
-                        sender: "Alya",
+                        sender: "Enjay",
                         avatar: "https://randomuser.me/api/portraits/women/44.jpg",
                         message: "Hai semua! Siapa yang ikut event bersih-bersih pantai besok?",
                         time: "10:30",
@@ -1641,14 +1649,35 @@
         }
         // Initialize the application
         document.addEventListener('DOMContentLoaded', init);
+
+        // Hide navbar on scroll down, show on scroll up
+        let lastScrollTop = 0;
+        const navbar = document.querySelector('.navbar');
+        const footer = document.querySelector('.footer');
+        window.addEventListener('scroll', function () {
+            let st = window.pageYOffset || document.documentElement.scrollTop;
+            if (st > lastScrollTop) {
+                // Scroll down
+                navbar.style.transform = 'translateY(-100%)';
+                footer.style.transform = 'translateY(0)'; // Show footer
+            } else {
+                // Scroll up
+                navbar.style.transform = 'translateY(0)';
+                footer.style.transform = 'translateY(100%)'; // Hide footer
+            }
+            lastScrollTop = st <= 0 ? 0 : st; // For Mobile or negative scrolling
+        }, false);
+
+        // Inisialisasi footer agar tersembunyi saat load
+        footer.style.transform = 'translateY(100%)';
     </script>
 
     <!-- Footer -->
-    <footer class="footer">
+    <!-- <footer class="footer">
         <div class="container">
             <p>&copy; 2025 Tim Creator 🌱. All rights reserved.</p>
         </div>
-    </footer>
+    </footer> -->
 </body>
 
 </html>

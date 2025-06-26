@@ -4,17 +4,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>EcoV</title>
+  <title>About</title>
   <!-- Tailwind CSS via CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="aboutstyle.css" />
 </head>
 
-<body class="bg-green-50 text-gray-800 flex flex-col min-h-screen">
+<body class="bg-[#F6F4DC] text-gray-800 flex flex-col min-h-screen">
   <!-- NAVBAR ATAS SAMA PERSIS DENGAN COMMUNITY DAN CAMPAIGN -->
-  <nav
-    style="width:100vw; height:60px; background:#285C37; display:flex; align-items:center; justify-content:space-between; position:fixed; top:0; left:0; z-index:100; box-shadow:0 2px 8px rgba(40,92,55,0.08);">
+  <nav id="mainNavbar"
+    style="width:100vw; height:60px; background:#339951; display:flex; align-items:center; justify-content:space-between; position:fixed; top:0; left:0; z-index:100; box-shadow:0 2px 8px rgba(40,92,55,0.08); transition: top 0.3s;">
     <button onclick="window.history.back()"
-      style="margin-left:24px; background:#fff; color:#285C37; border:2px solid #285C37; border-radius:8px; padding:8px 22px 8px 14px; font-weight:600; font-size:1.1rem; display:flex; align-items:center; gap:6px; box-shadow:0 2px 8px rgba(40,92,55,0.07); cursor:pointer; transition:background 0.15s, color 0.15s;">
+      style="margin-left:24px; background:#fff; color:#285C37; border:none; border-radius:8px; padding:8px 22px 8px 14px; font-weight:600; font-size:1.1rem; display:flex; align-items:center; gap:6px; box-shadow:0 2px 8px rgba(40,92,55,0.07); cursor:pointer; transition:background 0.15s, color 0.15s;">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="22"
         height="22">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
@@ -180,15 +181,16 @@
   </main>
 
   <!-- Footer copyright, hanya muncul saat scroll ke bawah -->
-  <footer id="copyrightFooter" class="bg-green-100 py-4 w-full shadow-md" style="display:none; position:fixed; left:0; bottom:0; z-index:40;">
-    <div class="container mx-auto px-4 text-center text-sm text-gray-600">
+  <footer id="copyrightFooter" class="py-2 w-full shadow-md"
+    style="display:none; position:fixed; left:0; bottom:0; z-index:40; background:#339951; height:36px;">
+    <div class="container mx-auto px-4 text-center" style="color:#fff; line-height:1.2;">
       &copy; 2025 Tim Creator 🌱. All rights reserved.
     </div>
   </footer>
 
   <script>
     // Tampilkan copyrightFooter hanya jika user scroll ke bawah (nyampe bawah halaman)
-    window.addEventListener('scroll', function() {
+    window.addEventListener('scroll', function () {
       var copyright = document.getElementById('copyrightFooter');
       if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 2) {
         copyright.style.display = 'block';
@@ -196,6 +198,21 @@
         copyright.style.display = 'none';
       }
     });
+
+    // Sembunyikan navbar saat scroll ke bawah, tampilkan saat scroll ke atas
+    let lastScrollTop = 0;
+    const navbar = document.getElementById('mainNavbar');
+    window.addEventListener('scroll', function () {
+      let st = window.pageYOffset || document.documentElement.scrollTop;
+      if (st > lastScrollTop && st > 10) {
+        // Scroll ke bawah
+        navbar.style.top = '-70px';
+      } else {
+        // Scroll ke atas
+        navbar.style.top = '0';
+      }
+      lastScrollTop = st <= 0 ? 0 : st;
+    }, false);
   </script>
 </body>
 

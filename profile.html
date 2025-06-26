@@ -112,7 +112,7 @@
     window.addEventListener("DOMContentLoaded", function () {
       if (!token) {
         alert("Silakan login kembali.");
-        window.location.href = "index.html";
+        window.location.href = "Profile.html";
         return;
       }
 
@@ -144,7 +144,7 @@
         console.error(err);
         alert("Sesi habis. Silakan login ulang.");
         localStorage.clear();
-        window.location.href = "index.html";
+        window.location.href = "Profile.html";
       });
     });
 

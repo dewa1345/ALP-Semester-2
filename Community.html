@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title> EcoV</title>
+    <title> Community</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         .bubble-chat {
@@ -30,6 +30,7 @@
             height: 24px;
             overflow: hidden;
         }
+
 
         .bubble-chat .bubble-tail svg {
             display: block;
@@ -108,10 +109,10 @@
         }
 
         /* NAVBAR STYLES */
-        .navbar {
-            width: 100vw;
-            height: 60px;
-            background: #235b37;
+        header {
+            width: 100%;
+            background: #339551;
+            /* sama seperti Homepage */
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -119,32 +120,60 @@
             top: 0;
             left: 0;
             z-index: 100;
+            padding: 0 16px;
+            height: 60px;
             box-shadow: 0 2px 8px rgba(35, 91, 55, 0.08);
         }
 
-        .navbar button {
-            margin-left: 24px;
-            background: #fff;
-            color: #2e944b;
-            border: 2px solid #2e944b;
-            border-radius: 8px;
-            padding: 8px 22px 8px 14px;
-            font-weight: 600;
-            font-size: 1.1rem;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            box-shadow: 0 2px 8px rgba(46, 148, 75, 0.07);
-            cursor: pointer;
-            transition: background 0.15s, color 0.15s;
+        #mainNavbar {
+            transform: translateY(0);
+            transition: transform 0.3s ease;
         }
 
-        .navbar span {
-            margin-right: 32px;
-            color: #fff;
+        #mainNavbar.hide-navbar {
+            transform: translateY(-100%);
+        }
+
+        .logo {
+            font-family: 'Poppins', sans-serif;
             font-size: 1.5rem;
             font-weight: 700;
-            letter-spacing: 1px;
+            color: #fff;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: #678e34;
+        }
+
+        .profile-icon {
+            color: #fff;
+            font-size: 1.2rem;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            transition: background 0.2s;
+        }
+
+        .profile-icon:hover {
+            background: rgba(255, 255, 255, 0.2);
         }
 
         .navbar-blur {
@@ -169,23 +198,56 @@
         .navbar-spacer {
             height: 70px;
         }
+
+        /* FOOTER STYLES */
+        footer {
+            width: 100%;
+            background: #c9f8c7;
+            padding: 12px 0;
+            /* posisi static agar footer hanya di bawah halaman, tidak menempel layar */
+            /* position: static; */
+            z-index: 10;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        footer .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        footer .container a {
+            color: #678e34;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        footer .container a:hover {
+            color: #4a6b24;
+        }
     </style>
 </head>
 
-<body class="bg-green-50 min-h-screen text-gray-800">
-    <!-- NAVBAR ATAS -->
-    <nav class="navbar">
-        <button onclick="window.history.back()">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="22"
-                height="22">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+<body class="bg-[#F6F4DC] min-h-screen text-gray-800">
+    <!-- NAVBAR ATAS BARU -->
+    <header id="mainNavbar" class="w-full flex items-center justify-between px-6 py-3 shadow-md"
+        style="position:fixed;top:0;left:0;z-index:100;">
+        <button onclick="window.history.back()"
+            class="flex items-center gap-2 bg-white text-[#357a38] font-bold px-4 py-2 rounded-lg shadow hover:bg-gray-100 focus:outline-none">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
             </svg>
             BACK
         </button>
-        <span>Community</span>
-    </nav>
+        <span class="text-white text-2xl font-semibold pr-2">Community</span>
+    </header>
     <div class="navbar-spacer"></div>
-    <div class="container mx-auto py-8 px-4">
+    <div class="container mx-auto py-8 px-4" style="margin-bottom: 110px;">
         <div class="flex flex-col lg:flex-row gap-8">
             <!-- Sidebar komunitas -->
             <aside class="lg:w-1/4 w-full">
@@ -223,8 +285,8 @@
                                         alt="Clean.id" class="w-8 h-8 rounded object-cover">Clean.id</button></li>
                             <li><button
                                     class="w-full flex items-center gap-3 text-left px-3 py-2 rounded hover:bg-green-100"
-                                    onclick="selectCommunity('HijauBersama')"><img src="
-                                    https://dispendik.surabaya.go.id/wp-content/uploads/2015/03/banu-smp-pgri-6.jpg"
+                                    onclick="selectCommunity('HijauBersama')"><img
+                                        src="https://dispendik.surabaya.go.id/wp-content/uploads/2015/03/banu-smp-pgri-6.jpg"
                                         alt="HijauBersama" class="w-8 h-8 rounded object-cover">HijauBersama</button>
                             </li>
                             <li><button
@@ -490,7 +552,7 @@
                         case 'Peduli_Mks': imgUrl = 'https://lppm.unusa.ac.id/wp-content/uploads/2023/09/Picture1.png'; break;
                         case 'Recycle.id': imgUrl = 'https://morethanstrata.com.au/wp-content/uploads/2023/09/1123213213123.jpg'; break;
                         case 'Clean.id': imgUrl = 'https://neatclean.com/cdn/shop/articles/Non-Toxic-Cleaning---Neat-Clean_9a290919-5302-4b53-ae29-311e9ec509ab.jpg?v=1742909575'; break;
-                        case 'HijauBersama': imgUrl = 'https://dispendik.surabaya.go.id/wp-content/uploads/2015/03/banu-smp-pgri-6.jpg'; break;
+                        case 'HijauBersama': imgUrl = 'https://t-2.tstatic.net/palembang/foto/bank/images/PT-HBAP-Menenun-Masa-Depan-Hijau-Bersama-Indonesia-999.jpg'; break;
                         case 'EcoYouth': imgUrl = 'https://newsroom.toyota.co.id/app/sam/assets/news/9a49149705bf0b8e38690e6ca6d6d5ed.jpeg'; break;
                         case 'ZeroWaste': imgUrl = 'https://shopequo.com/cdn/shop/articles/Zero-Waste_2bde2b51-61ac-48a6-b1ee-47b02ba2a641.png?v=1701594753&width=1600'; break;
                         case 'GreenSteps': imgUrl = 'https://loquiz.com/wpmainpage/wp-content/uploads/2022/08/Logo-Green-Steps.png'; break;
@@ -528,7 +590,7 @@
             ${c.members.map(m => `<li class="bg-green-100 text-[#678E34] px-3 py-1 rounded-full text-sm">${m.name}</li>`).join('')}
           </ul>
           <div class="flex flex-wrap gap-4 mb-2">
-            ${c.members.map(m => `<img src="${m.avatar}" alt="${m.name}" class="w-12 h-12 object-cover rounded-full border-2 border-[#678E34]" />`).join('')}
+            ${c.members.map(m => `<img src="${m.avatar}" alt="${m.name}" class="w-12 h-12 object-cover rounded-full border-2 border-[#678E34]" onerror="this.onerror=null;this.src='https://cdn-icons-png.flaticon.com/512/3135/3135715.png';" />`).join('')}
           </div>
         </div>
         <div class="mb-20">
@@ -541,7 +603,7 @@
             <button onclick="sendChat()" class="bg-[#678E34] text-white px-4 py-1 rounded hover:bg-[#4a6b24]">Kirim</button>
           </div>
         </div>
-        ${joinedCommunities.includes(key) ? `<button onclick="leaveCommunity('${key}')" id="leaveBtn" class="fixed bottom-8 right-8 bg-red-600 text-white px-6 py-3 rounded-full shadow-lg font-bold text-lg hover:bg-red-800 z-50">Leave Komunitas</button>` : `<button onclick="joinCommunity('${key}')" id="joinBtn" class="fixed bottom-8 right-8 bg-[#678E34] text-white px-6 py-3 rounded-full shadow-lg font-bold text-lg hover:bg-[#4a6b24] z-50">Join Komunitas</button>`}
+        ${joinedCommunities.includes(key) ? `<button onclick="leaveCommunity('${key}')" id="leaveBtn" class="fixed bottom-8 right-8 bg-red-600 text-white px-6 py-3 rounded-full shadow-lg font-bold text-lg hover:bg-red-800 z-[100]">Leave Komunitas</button>` : `<button onclick="joinCommunity('${key}')" id="joinBtn" class="fixed bottom-8 right-8 bg-[#678E34] text-white px-6 py-3 rounded-full shadow-lg font-bold text-lg hover:bg-[#4a6b24] z-[100]">Join Komunitas</button>`}
       `;
             setTimeout(() => {
                 const chatInput = document.getElementById('chatInput');
@@ -715,14 +777,22 @@
                 selectCommunity(joinedCommunities[0]);
             }
         };
-    </script>
 
-    <!-- NAVBAR BAWAH (FOOTER) -->
-    <footer class="bg-green-100 py-4 w-full shadow-md">
-        <div class="container mx-auto px-4 text-center text-sm text-gray-600">
-            &copy; 2025 Tim Creator 🌱. All rights reserved.
-        </div>
-    </footer>
+        // Navbar hide on scroll
+        let lastScrollY = window.scrollY;
+        window.addEventListener('scroll', function () {
+            const navbar = document.getElementById('mainNavbar');
+            if (!navbar) return;
+            if (window.scrollY > lastScrollY && window.scrollY > 60) {
+                // Scroll down
+                navbar.classList.add('hide-navbar');
+            } else {
+                // Scroll up
+                navbar.classList.remove('hide-navbar');
+            }
+            lastScrollY = window.scrollY;
+        });
+    </script>
 </body>
 
 </html>
