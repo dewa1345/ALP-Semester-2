@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Recycle Login/Signup</title>
   <link rel="stylesheet" href="style.css" />
   <style>
@@ -22,14 +23,21 @@
     }
 
     @keyframes fadeOut {
-      from { opacity: 1; }
-      to { opacity: 0; transform: scale(1.05); }
+      from {
+        opacity: 1;
+      }
+
+      to {
+        opacity: 0;
+        transform: scale(1.05);
+      }
     }
   </style>
 </head>
+
 <body>
   <div class="container" id="container">
-    
+
     <!-- Sign Up -->
     <div class="form-container sign-up-container">
       <form id="signup-form">
@@ -62,7 +70,7 @@
           <input type="password" placeholder="Password" id="signin-password" required />
           <span class="eye-icon" onclick="togglePassword('signin-password')">👁️</span>
         </div>
-        
+
         <div style="width: 100%; display: flex; align-items: center; margin-top: 10px; margin-bottom: 15px;">
           <input type="checkbox" id="remember" style="margin-right: 8px; width: 16px; height: 16px;" />
           <label for="remember" style="font-size: 14px; cursor: pointer;">Remember me</label>
@@ -87,7 +95,8 @@
     <div class="overlay-container">
       <div class="overlay">
         <!-- Panel Kiri dengan Background eco1.png -->
-        <div class="overlay-panel overlay-left" style="background-image: url('evo1.jpg'); background-size: cover; background-position: center;">
+        <div class="overlay-panel overlay-left"
+          style="background-image: url('Gambar/evo1.jpg'); background-size: cover; background-position: center;">
           <div class="overlay-text">
             <h1>Welcome Back!</h1>
             <p>To keep connected, please login</p>
@@ -96,7 +105,8 @@
         </div>
 
         <!-- Panel Kanan dengan Background eco2.png -->
-        <div class="overlay-panel overlay-right" style="background-image: url('evo2.jpg'); background-size: cover; background-position: center;">
+        <div class="overlay-panel overlay-right"
+          style="background-image: url('Gambar/evo2.jpg'); background-size: cover; background-position: center;">
           <div class="overlay-text">
             <h1>Hello, Friend!</h1>
             <p>Enter your personal details to register</p>
@@ -105,98 +115,99 @@
         </div>
       </div>
     </div>
-  <!-- Script -->
-  <script>
-    const signUpButton = document.getElementById('signUp');
-    const signInButton = document.getElementById('signIn');
-    const container = document.getElementById('container');
+    <!-- Script -->
+    <script>
+      const signUpButton = document.getElementById('signUp');
+      const signInButton = document.getElementById('signIn');
+      const container = document.getElementById('container');
 
-    signUpButton.addEventListener('click', () => {
-      container.classList.add("right-panel-active");
-    });
+      signUpButton.addEventListener('click', () => {
+        container.classList.add("right-panel-active");
+      });
 
-    signInButton.addEventListener('click', () => {
-      container.classList.remove("right-panel-active");
-    });
+      signInButton.addEventListener('click', () => {
+        container.classList.remove("right-panel-active");
+      });
 
-    function togglePassword(id) {
-      const input = document.getElementById(id);
-      input.type = input.type === "password" ? "text" : "password";
-    }
+      function togglePassword(id) {
+        const input = document.getElementById(id);
+        input.type = input.type === "password" ? "text" : "password";
+      }
 
-    function validateLogin() {
-      const email = document.getElementById('login-email').value.trim();
-      const password = document.getElementById('signin-password').value.trim();
+      function validateLogin() {
+        const email = document.getElementById('login-email').value.trim();
+        const password = document.getElementById('signin-password').value.trim();
 
-      if (email === "" || password === "") {
-        alert("Please fill in all fields.");
+        if (email === "" || password === "") {
+          alert("Please fill in all fields.");
+          return false;
+        }
+
+        fetch("http://localhost:8080/api/v1/auth/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ email, password })
+        })
+          .then(response => response.json())
+          .then(data => {
+            if (data.success) {
+              // ✅ Save token + name
+              localStorage.setItem("token", data.token);
+              localStorage.setItem("username", data.name); // This is the real name from DB
+              localStorage.setItem("email", data.email);
+
+              // ✅ Redirect
+              window.location.href = "Homepage.html";
+            } else {
+              alert(data.message || "Login failed. Please check your credentials.");
+            }
+          })
+          .catch(error => {
+            console.error("Login error:", error);
+            alert("An error occurred during login.");
+          });
+
         return false;
       }
 
-      fetch("http://localhost:8080/api/v1/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ email, password })
-      })
-      .then(response => response.json())
-      .then(data => {
-        if (data.success) {
-          // ✅ Save token + name
-          localStorage.setItem("token", data.token);
-          localStorage.setItem("username", data.name); // This is the real name from DB
-          localStorage.setItem("email", data.email);
 
-          // ✅ Redirect
-          window.location.href = "Homepage.html";
-        } else {
-          alert(data.message || "Login failed. Please check your credentials.");
+      function handleSignUp() {
+        const name = document.getElementById('signup-name').value.trim();
+        const email = document.getElementById('signup-email').value.trim();
+        const password = document.getElementById('signup-password').value.trim();
+
+        if (name === "" || email === "" || password === "") {
+          alert("Please complete all sign-up fields.");
+          return;
         }
-      })
-      .catch(error => {
-        console.error("Login error:", error);
-        alert("An error occurred during login.");
-      });
 
-      return false;
-    }
-
-
-    function handleSignUp() {
-      const name = document.getElementById('signup-name').value.trim();
-      const email = document.getElementById('signup-email').value.trim();
-      const password = document.getElementById('signup-password').value.trim();
-
-      if (name === "" || email === "" || password === "") {
-        alert("Please complete all sign-up fields.");
-        return;
+        fetch("http://localhost:8080/api/v1/auth/register", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ name, email, password })
+        })
+          .then(response => response.json())
+          .then(data => {
+            if (data.success) {
+              alert("Account created successfully! Now log in.");
+              container.classList.remove("right-panel-active");
+            } else {
+              alert(data.message || "Registration failed.");
+            }
+          })
+          .catch(error => {
+            console.error("Registration error:", error);
+            alert("An error occurred during registration.");
+          });
       }
+    </script>
 
-      fetch("http://localhost:8080/api/v1/auth/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ name, email, password })
-      })
-      .then(response => response.json())
-      .then(data => {
-        if (data.success) {
-          alert("Account created successfully! Now log in.");
-          container.classList.remove("right-panel-active");
-        } else {
-          alert(data.message || "Registration failed.");
-        }
-      })
-      .catch(error => {
-        console.error("Registration error:", error);
-        alert("An error occurred during registration.");
-      });
-    }
-  </script>
-  
-  <script type="module" src="api.js"></script>
+    <script type="module" src="api.js"></script>
 
 </body>
+
 </html>
